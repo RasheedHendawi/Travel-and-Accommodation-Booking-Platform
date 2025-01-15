@@ -1,0 +1,62 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rrash\\Desktop\\FTS-Projects\\Final\\Travel-and-Accommodation-Booking-Platform\\TABP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{82C068D9-BF12-4BA9-94FD-4EC6F4BA12DF}|TABP\\TABP.csproj|c:\\users\\rrash\\desktop\\fts-projects\\final\\travel-and-accommodation-booking-platform\\tabp\\tabp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{82C068D9-BF12-4BA9-94FD-4EC6F4BA12DF}|TABP\\TABP.csproj|solutionrelative:tabp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11CA36D1-D366-4F77-AF6E-F21794CD9659}|Domain\\Domain.csproj|c:\\users\\rrash\\desktop\\fts-projects\\final\\travel-and-accommodation-booking-platform\\tabp\\domain\\domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{11CA36D1-D366-4F77-AF6E-F21794CD9659}|Domain\\Domain.csproj|solutionrelative:domain\\domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rrash\\Desktop\\FTS-Projects\\Final\\Travel-and-Accommodation-Booking-Platform\\TABP\\TABP\\appsettings.json",
+              "RelativeDocumentMoniker": "TABP\\appsettings.json",
+              "ToolTip": "C:\\Users\\rrash\\Desktop\\FTS-Projects\\Final\\Travel-and-Accommodation-Booking-Platform\\TABP\\TABP\\appsettings.json",
+              "RelativeToolTip": "TABP\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-15T18:21:00.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Domain",
+              "DocumentMoniker": "C:\\Users\\rrash\\Desktop\\FTS-Projects\\Final\\Travel-and-Accommodation-Booking-Platform\\TABP\\Domain\\Domain.csproj",
+              "RelativeDocumentMoniker": "Domain\\Domain.csproj",
+              "ToolTip": "C:\\Users\\rrash\\Desktop\\FTS-Projects\\Final\\Travel-and-Accommodation-Booking-Platform\\TABP\\Domain\\Domain.csproj",
+              "RelativeToolTip": "Domain\\Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-15T18:17:22.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
