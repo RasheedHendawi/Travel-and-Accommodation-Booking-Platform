@@ -12,7 +12,7 @@ namespace Domain.Entities
         public Booking Booking { get; set; }
         public Guid RoomId { get; set; }
         public string RoomClassName { get; set; }
-        public string RoomName { get; set;
+        public string RoomNumber { get; set; }
         public decimal Price { get; set; }
         public decimal? DiscountPercentage { get; set; }
     }

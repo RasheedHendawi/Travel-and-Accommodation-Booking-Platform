@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Hotel
+    public class Hotel : EntityKey, IAuditableEntity
     {
         public Guid CityId { get; set; }
         public City City { get; set; }
