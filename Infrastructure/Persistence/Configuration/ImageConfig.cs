@@ -11,7 +11,7 @@ namespace Infrastructure.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Image> builder)
         {
             builder.HasKey(i => i.Id);
-            builder.HasIndex(i => i.EntityId);
+            //builder.HasIndex(i => i.EntityId);
             builder.Property(a => a.Type).HasConversion(new EnumToStringConverter<ImageType>());
 
 

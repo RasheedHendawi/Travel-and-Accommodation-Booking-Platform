@@ -5,8 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.DbContext
 {
-    public class HotelBookingPlatformDbContext(DbContextOptions<HotelBookingPlatformDbContext> options) : DbContext(options)
+    public class HotelBookingPlatformDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public HotelBookingPlatformDbContext(DbContextOptions<HotelBookingPlatformDbContext> options) : base(options){
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Discount> Discounts { get; set; }
@@ -19,7 +22,8 @@ namespace Infrastructure.Persistence.DbContext
         public DbSet<City> Cities { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Owner> Owners { get; set; }
-        public override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new RoleConfig());
@@ -34,6 +38,5 @@ namespace Infrastructure.Persistence.DbContext
             modelBuilder.ApplyConfiguration(new OwnerConfig());
             modelBuilder.ApplyConfiguration(new ImageConfig());
         }
-
     }
 }

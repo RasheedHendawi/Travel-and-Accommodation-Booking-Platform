@@ -24,7 +24,7 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(a => a.PaymentMethod)
                 .HasConversion(
                 new EnumToStringConverter<PaymentMethod>());
-            builder.HasIndex(a => new { a.CheckIn, a.CheckOut });
+            //builder.HasIndex(a => new { a.CheckIn, a.CheckOut });
         }
     }
 }

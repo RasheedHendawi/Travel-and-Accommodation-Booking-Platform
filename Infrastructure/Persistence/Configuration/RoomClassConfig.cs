@@ -27,11 +27,11 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(rc => rc.Price)
                 .HasColumnType("decimal(18,2)");
 
-            builder.HasIndex(rc => rc.RoomType);
+            //builder.HasIndex(rc => rc.RoomType);
 
-            builder.HasIndex(rc => new { rc.AdultCapacity, rc.ChildCapacity });
+            //builder.HasIndex(rc => new { rc.AdultCapacity, rc.ChildCapacity });
 
-            builder.HasIndex(r => r.Price);
+           // builder.HasIndex(r => r.Price);
         }
     }
 }

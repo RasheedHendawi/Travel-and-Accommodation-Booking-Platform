@@ -12,12 +12,18 @@ namespace Infrastructure.Persistence.Configuration
             builder.HasMany(u => u.Roles)
                 .WithMany(r => r.Users);
 
+            builder.HasMany(u => u.Roles)
+                .WithMany(r => r.Users).UsingEntity<Dictionary<string, object>>(
+                "UserRole",
+                a => a.HasOne<Role>().WithMany().HasForeignKey("RoleId")
+                .OnDelete(DeleteBehavior.Cascade),
+                a => a.HasOne<User>().WithMany().HasForeignKey("UserId")
+                .OnDelete(DeleteBehavior.Cascade));
 
 
 
 
-
-            builder.HasIndex(u => u.Email).IsUnique();
+            //builder.HasIndex(u => u.Email).IsUnique();
         }
     }
 }

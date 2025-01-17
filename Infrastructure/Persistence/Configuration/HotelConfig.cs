@@ -22,7 +22,7 @@ namespace Infrastructure.Persistence.Configuration
                 .HasColumnType("decimal(18,2)");
             builder.Ignore(s => s.Gallery);
             builder.Ignore(s => s.Thumbnail);
-            builder.HasIndex(s => s.StartRating);
+            //builder.HasIndex(s => s.StartRating);
         }
     }
 }
