@@ -13,7 +13,7 @@ namespace Infrastructure.Authentication.JWT
 {
     public static class AuthServiceConfig
     {
-        public static IServiceCollection AddAuthServiceConfig
+        public static IServiceCollection AddAuthService
             (this IServiceCollection services)
         {
             services.AddScoped<IValidator<JwtSettings>, JwtSettingsValidator>();

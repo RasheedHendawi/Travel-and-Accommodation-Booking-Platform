@@ -14,7 +14,7 @@ namespace Domain.Entities
         public decimal TotalPrice { get; set; }
         public DateOnly CheckIn { get; set; }
         public DateOnly CheckOut { get; set; }
-        public DateOnly BokkingDate { get; set; }
+        public DateOnly BookingDate { get; set; }
         public string? GuestRemarks { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
     }

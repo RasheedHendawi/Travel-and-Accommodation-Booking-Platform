@@ -17,6 +17,6 @@ namespace Domain.Entities
         public ICollection<Image> Gallary { get; set; } = new List<Image>();
         public ICollection<Discount> Discounts { get; set; } = new List<Discount>();
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

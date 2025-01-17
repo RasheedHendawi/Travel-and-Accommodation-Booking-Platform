@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Domain.Enums
 {
     public enum RoomType
     {
-       Luxury =1,
-       Boutique =2,
-       Budget =3
+        Budget = 0,
+        Luxury = 1,
+        Boutique = 2
     }
 }
