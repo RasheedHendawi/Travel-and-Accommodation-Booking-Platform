@@ -5,36 +5,32 @@ using System.Data;
 
 namespace Infrastructure.Persistence.DbContext
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(HotelBookingPlatformDbContext context) : IUnitOfWork
     {
-        private readonly HotelBookingPlatformDbContext _context;
-        public UnitOfWork(HotelBookingPlatformDbContext context)
-        {
-            _context = context;
-        }
+
         public async Task BeginTransactionAsync()
         {
-            await _context.Database.BeginTransactionAsync(IsolationLevel.Serializable);
+            await context.Database.BeginTransactionAsync(IsolationLevel.Serializable);
         }
 
 
         public async Task CommitTransactionAsync()
         {
-            if (_context.Database.CurrentTransaction is null) return;
+            if (context.Database.CurrentTransaction is null) return;
 
-            await _context.Database.CommitTransactionAsync();
+            await context.Database.CommitTransactionAsync();
         }
         public async Task RollbackTransactionAsync()
         {
-            if (_context.Database.CurrentTransaction is null) return;
+            if (context.Database.CurrentTransaction is null) return;
 
-            await _context.Database.RollbackTransactionAsync();
+            await context.Database.RollbackTransactionAsync();
         }
         public async Task<int> SaveChangesAsync()
         {
-            _context.ChangeTracker.DetectChanges();
+                context.ChangeTracker.DetectChanges();
 
-            foreach (var entry in _context.ChangeTracker.Entries<IAuditableEntity>())
+            foreach (var entry in context.ChangeTracker.Entries<IAuditableEntity>())
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -45,7 +41,7 @@ namespace Infrastructure.Persistence.DbContext
                         break;
                 }
 
-            return await _context.SaveChangesAsync();
+            return await context.SaveChangesAsync();
         }
 
     }

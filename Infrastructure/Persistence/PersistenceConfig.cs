@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Persistence.DbContext;
 using LinqToDB.EntityFrameworkCore;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +35,19 @@ namespace Infrastructure.Persistence
             services.AddScoped<IPasswordHasher, PasswordHasher>();
 
             return services;
+        }
+        public static IApplicationBuilder AddMigrate(this IApplicationBuilder app)
+        {
+            using var scope = app.ApplicationServices.CreateScope();
+
+            using var context = scope.ServiceProvider.GetRequiredService<HotelBookingPlatformDbContext>();
+
+            if (context.Database.GetPendingMigrations().Any())
+            {
+                context.Database.Migrate();
+            }
+
+            return app;
         }
     }
 }

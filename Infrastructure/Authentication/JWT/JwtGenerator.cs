@@ -2,19 +2,17 @@
 using Domain.Interfaces.Authentication;
 using Domain.Models;
 using Infrastructure.Authentication.JWT.Validator;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 namespace Infrastructure.Authentication.JWT
 {
-    public class JwtGenerator : IJwtGenerator
+    public class JwtGenerator(IOptions<JwtSettings> jwtSettings) : IJwtGenerator
     {
-        private readonly JwtSettings _jwtSettings;
-        public JwtGenerator(JwtSettings jwtSettings)
-        {
-            _jwtSettings = jwtSettings;
-        }
+        private readonly JwtSettings _jwtSettings = jwtSettings.Value;
+
         public JwtToken GenerateToken(User user)
         {
             var claims = new List<Claim>

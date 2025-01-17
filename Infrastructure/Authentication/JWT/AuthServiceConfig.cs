@@ -2,6 +2,7 @@
 using FluentValidation;
 using Infrastructure.Authentication.JWT.Validator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +18,7 @@ namespace Infrastructure.Authentication.JWT
             (this IServiceCollection services)
         {
             services.AddScoped<IValidator<JwtSettings>, JwtSettingsValidator>();
-            
+
             services.AddOptions<JwtSettings>()
                     .BindConfiguration(nameof(JwtSettings))
                     .FluentValidation()
@@ -28,23 +29,24 @@ namespace Infrastructure.Authentication.JWT
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+            })
+                .AddJwtBearer(options =>
             {
-                var jwtSettings = services.BuildServiceProvider().GetService<IOptions<JwtSettings>>()!.Value;
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
+                using var scope = services.BuildServiceProvider().CreateScope();
+                var con = scope.ServiceProvider.GetRequiredService<IOptions<JwtSettings>>().Value;
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidIssuer = jwtSettings.Issuer,
                     ValidateAudience = true,
-                    ValidAudience = jwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
                     ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = con.Issuer,
+                    ValidAudience = con.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(con.Key)),
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
             services.AddTransient<IJwtGenerator, JwtGenerator>();
             return services;
         }
