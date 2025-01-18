@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Models;
 
-namespace Domain.Interfaces.Authentication
+namespace Application.Interfaces.Authentication
 {
     public interface IJwtGenerator
     {

@@ -21,19 +21,20 @@ namespace Infrastructure.Persistence.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfig());
-            modelBuilder.ApplyConfiguration(new RoleConfig());
-            modelBuilder.ApplyConfiguration(new DiscountConfig());
-            modelBuilder.ApplyConfiguration(new ReviewConfig());
-            modelBuilder.ApplyConfiguration(new RoomConfig());
-            modelBuilder.ApplyConfiguration(new RoomClassConfig());
-            modelBuilder.ApplyConfiguration(new HotelConfig());
-            modelBuilder.ApplyConfiguration(new BookingConfig());
-            modelBuilder.ApplyConfiguration(new AmenityConfig());
-            modelBuilder.ApplyConfiguration(new CityConfig());
-            modelBuilder.ApplyConfiguration(new OwnerConfig());
-            modelBuilder.ApplyConfiguration(new ImageConfig());
-            modelBuilder.ApplyConfiguration(new InvoiceConfig());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HotelBookingPlatformDbContext).Assembly);
+            /*            modelBuilder.ApplyConfiguration(new UserConfig());
+                        modelBuilder.ApplyConfiguration(new RoleConfig());
+                        modelBuilder.ApplyConfiguration(new DiscountConfig());
+                        modelBuilder.ApplyConfiguration(new ReviewConfig());
+                        modelBuilder.ApplyConfiguration(new RoomConfig());
+                        modelBuilder.ApplyConfiguration(new RoomClassConfig());
+                        modelBuilder.ApplyConfiguration(new HotelConfig());
+                        modelBuilder.ApplyConfiguration(new BookingConfig());
+                        modelBuilder.ApplyConfiguration(new AmenityConfig());
+                        modelBuilder.ApplyConfiguration(new CityConfig());
+                        modelBuilder.ApplyConfiguration(new OwnerConfig());
+                        modelBuilder.ApplyConfiguration(new ImageConfig());
+                        modelBuilder.ApplyConfiguration(new InvoiceConfig());*/
         }
     }
 }
