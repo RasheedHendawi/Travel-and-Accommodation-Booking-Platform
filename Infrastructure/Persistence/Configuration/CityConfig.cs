@@ -11,8 +11,8 @@ namespace Infrastructure.Persistence.Configuration
             builder.HasKey(c => c.Id);
             builder.HasMany(c => c.Hotels)
                 .WithOne(r => r.City)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
             builder.Ignore(a => a.Thumbnail);
         }
     }

@@ -10,9 +10,9 @@ namespace Infrastructure.Persistence.Configuration
         {
             builder.HasKey(i => i.Id);
             builder.Property(i => i.Price)
-                .HasColumnType("decimal(18,2)");
+                .HasPrecision(18, 2);
             builder.Property(i => i.DiscountPercentage)
-                .HasColumnType("decimal(18,2)");
+                .HasPrecision(18, 2);
         }
     }
 }

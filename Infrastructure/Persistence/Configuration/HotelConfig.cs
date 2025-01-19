@@ -12,17 +12,22 @@ namespace Infrastructure.Persistence.Configuration
 
             builder.HasMany(s => s.RoomClasses)
                 .WithOne(r => r.Hotel)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
-            builder.Property(s => s.Latitude)
-                .HasColumnType("decimal(18,2)");
-            builder.Property(s => s.Longitude)
-                .HasColumnType("decimal(18,2)");
-            builder.Property(s => s.ReviewsRating)
-                .HasColumnType("decimal(18,2)");
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(h => h.Bookgins)
+                .WithOne(b => b.Hotel)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
             builder.Ignore(s => s.Gallery);
             builder.Ignore(s => s.Thumbnail);
-            //builder.HasIndex(s => s.StartRating);
+
+            builder.Property(s => s.Latitude)
+                .HasPrecision(8, 6);
+            builder.Property(s => s.Longitude).HasPrecision(8, 6);
+            builder.Property(s => s.ReviewsRating)
+                .HasPrecision(8, 6);
+            builder.HasIndex(s => s.StartRating);
         }
     }
 }

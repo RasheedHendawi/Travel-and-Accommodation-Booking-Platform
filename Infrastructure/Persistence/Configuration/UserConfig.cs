@@ -23,7 +23,7 @@ namespace Infrastructure.Persistence.Configuration
 
 
 
-            //builder.HasIndex(u => u.Email).IsUnique();
+            builder.HasIndex(u => u.Email).IsUnique();
         }
     }
 }

@@ -1,5 +1,4 @@
 using Infrastructure;
-using Infrastructure.Persistence;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
-
 builder.Services
     .AddInfrastructure(builder.Configuration)
-    .AddControllers(); 
+    .AddControllers();
 
 builder.Services.AddSwaggerGen();
 
@@ -21,7 +19,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
-app.AddMigrate();
+//app.AddMigrate();
 app.UseAuthentication();
 app.UseAuthorization();
 //app.UseRateLimiter();

@@ -11,8 +11,8 @@ namespace Infrastructure.Persistence.Configuration
         {
             builder.HasKey(d => d.Id);
             builder.Property(d => d.Percentage)
-                .HasColumnType("decimal(18,2)");
-            //builder.HasIndex(d => new { d.StartDate, d.EndDate });
+                .HasPrecision(18, 2);
+            builder.HasIndex(d => new { d.StartDate, d.EndDate });
         }
     }
 }

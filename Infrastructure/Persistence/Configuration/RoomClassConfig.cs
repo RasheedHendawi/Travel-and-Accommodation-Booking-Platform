@@ -25,13 +25,13 @@ namespace Infrastructure.Persistence.Configuration
               .WithMany(a => a.RoomClasses);
 
             builder.Property(rc => rc.Price)
-                .HasColumnType("decimal(18,2)");
+                .HasPrecision(18, 2);
 
-            //builder.HasIndex(rc => rc.RoomType);
+            builder.HasIndex(rc => rc.RoomType);
 
-            //builder.HasIndex(rc => new { rc.AdultCapacity, rc.ChildCapacity });
+            builder.HasIndex(rc => new { rc.AdultCapacity, rc.ChildCapacity });
 
-           // builder.HasIndex(r => r.Price);
+            builder.HasIndex(r => r.Price);
         }
     }
 }

@@ -3,7 +3,7 @@ using Domain.Interfaces.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
-namespace Infrastructure.Persistence.DbContext
+namespace Infrastructure.Persistence.ContextDb
 {
     public class UnitOfWork(HotelBookingPlatformDbContext context) : IUnitOfWork
     {

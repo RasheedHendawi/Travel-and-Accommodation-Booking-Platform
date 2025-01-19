@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces.Authentication;
+﻿using Application.Interfaces.Authentication;
 using Infrastructure.Authentication.JWT;
 using Infrastructure.Authentication.JWT.Validator;
 using Infrastructure.Persistence;

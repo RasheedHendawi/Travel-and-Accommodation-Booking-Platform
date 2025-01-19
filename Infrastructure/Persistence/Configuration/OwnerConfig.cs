@@ -11,7 +11,7 @@ namespace Infrastructure.Persistence.Configuration
             builder.HasKey(o => o.Id);
             builder.HasMany(o => o.Hotels).WithOne(p => p.Owner)
                 .HasForeignKey(p => p.OwnerId)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
         }
     }

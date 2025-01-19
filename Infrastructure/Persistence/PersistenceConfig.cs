@@ -1,11 +1,12 @@
-﻿using Domain.Interfaces.UnitOfWork;
-using Infrastructure.Persistence.DbContext;
+﻿using Domain.Entities;
+using Domain.Interfaces.UnitOfWork;
+using Infrastructure.Persistence.ContextDb;
 using LinqToDB.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace Infrastructure.Persistence
 {
@@ -13,8 +14,8 @@ namespace Infrastructure.Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext(configuration);
-                //.AddHashing();
+            services.AddDbContext(configuration)
+                .AddHashing();
             return services;
         }
         private static IServiceCollection AddDbContext(
@@ -31,12 +32,7 @@ namespace Infrastructure.Persistence
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
-        /*        private static IServiceCollection AddHashing(this IServiceCollection services)
-                {
-                    services.AddScoped<IPasswordHasher, PasswordHasher>();
 
-                    return services;
-                }*/
         public static IApplicationBuilder AddMigrate(this IApplicationBuilder app)
         {
             using var scope = app.ApplicationServices.CreateScope();
@@ -58,5 +54,11 @@ namespace Infrastructure.Persistence
 
             return app;
         }
+        private static IServiceCollection AddHashing(this IServiceCollection services)
+        {
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            return services;
+        }
+        
     }
 }
