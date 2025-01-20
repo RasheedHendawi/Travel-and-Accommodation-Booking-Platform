@@ -9,6 +9,6 @@ namespace Domain.Interfaces.Repositories
         Task<Amenity?> GetByIdAsync(Guid id);
         Task<bool> ExistAsync(Expression<Func<Amenity, bool>> predicate);
         Task<Amenity> CreateAsync(Amenity amenity);
-        Task UpdtaeAsync(Amenity amenity);
+        Task UpdateAsync(Amenity amenity);
     }
 }
