@@ -7,23 +7,21 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IRoomRepository
     {
-        Task<bool> ExistsAsync(Expression<Func<Room, bool>> predicate,
-                               CancellationToken cancellationToken = default);
+        Task<bool> ExistsAsync(Expression<Func<Room, bool>> predicate);
 
         Task<PaginatedList<RoomForManagement>> GetForManagementAsync(
-          Query<Room> query,
-          CancellationToken cancellationToken = default);
+          Query<Room> query);
 
-        Task<Room?> GetByIdAsync(Guid roomClassId, Guid id, CancellationToken cancellationToken = default);
+        Task<Room?> GetByIdAsync(Guid roomClassId, Guid id);
 
-        Task<Room> CreateAsync(Room room, CancellationToken cancellationToken = default);
+        Task<Room> CreateAsync(Room room);
 
-        Task UpdateAsync(Room room, CancellationToken cancellationToken = default);
+        Task UpdateAsync(Room room);
 
-        Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+        Task DeleteAsync(Guid id);
 
-        Task<PaginatedList<Room>> GetAsync(Query<Room> query, CancellationToken cancellationToken = default);
+        Task<PaginatedList<Room>> GetAsync(Query<Room> query);
 
-        Task<Room?> GetByIdWithRoomClassAsync(Guid roomId, CancellationToken cancellationToken = default);
+        Task<Room?> GetByIdWithRoomClassAsync(Guid roomId);
     }
 }
