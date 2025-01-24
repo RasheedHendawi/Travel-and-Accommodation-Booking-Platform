@@ -8,7 +8,7 @@ namespace Domain.Interfaces.Repositories
     {
         Task DeleteAsync(Guid id);
         Task<bool> ExistsAsync(Expression<Func<Discount, bool>> expression);
-        Task<Discount?> GetByIdAsync(Guid roomClassID);
+        Task<Discount?> GetByIdAsync(Guid roomClassID, Guid id);
         Task<Discount> CreateAsync(Discount discount);
         Task<PaginatedList<Discount>> GetAsync(Query<Discount> query);
     }
