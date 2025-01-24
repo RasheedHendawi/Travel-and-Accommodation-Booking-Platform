@@ -31,8 +31,7 @@ namespace Shared.ValidatorHelper
 
             var optionsTypeName = typeof(TOptions).Name;
 
-            var errors = results.Errors.Select(e
-              => ValidationMessages.FailureMessages(optionsTypeName, e.PropertyName, e.ErrorMessage));
+            var errors = results.Errors.Select(e => ValidationMessages.FailureMessages(optionsTypeName, e.PropertyName, e.ErrorMessage));
 
             return ValidateOptionsResult.Fail(errors);
         }

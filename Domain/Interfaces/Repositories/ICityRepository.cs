@@ -7,7 +7,7 @@ namespace Domain.Interfaces.Repositories
     public interface ICityRepository
     {
         Task<IEnumerable<City>> GetMostVisitedAsync(int count);
-        Task CreateAsync(City city);
+        Task<City> CreateAsync(City city);
         Task<City?> GetByIdAsync(Guid id);
         Task DeleteAsync(Guid id);
         Task UpdateAsync(City city);

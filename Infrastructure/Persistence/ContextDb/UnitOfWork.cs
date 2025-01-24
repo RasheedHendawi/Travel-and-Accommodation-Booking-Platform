@@ -28,7 +28,7 @@ namespace Infrastructure.Persistence.ContextDb
         }
         public async Task<int> SaveChangesAsync()
         {
-                context.ChangeTracker.DetectChanges();
+            context.ChangeTracker.DetectChanges();
 
             foreach (var entry in context.ChangeTracker.Entries<IAuditableEntity>())
                 switch (entry.State)
