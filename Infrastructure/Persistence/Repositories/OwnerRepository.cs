@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.Persistence.Repositories
 {
-    internal class OwnerRepository(HotelBookingPlatformDbContext context) : IOwnerRepository
+    public class OwnerRepository(HotelBookingPlatformDbContext context) : IOwnerRepository
     {
         public async Task<Owner> CreateAsync(Owner owner)
         {
