@@ -9,7 +9,7 @@ namespace Domain.Models
         public int StarRating { get; set; }
         public Owner Owner { get; set; }
         public int NumberOfRooms { get; set; }
-        public DateTime CreatedAtUtc { get; set; }
-        public DateTime? ModifiedAtUtc { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
