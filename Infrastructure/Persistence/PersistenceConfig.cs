@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UnitOfWork;
 using Infrastructure.Persistence.ContextDb;
+using Infrastructure.Persistence.Repositories;
 using LinqToDB.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,8 @@ namespace Infrastructure.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext(configuration)
-                .AddHashing();
+                .AddHashing()
+                .AddRepositories();
             return services;
         }
         private static IServiceCollection AddDbContext(
@@ -26,39 +28,35 @@ namespace Infrastructure.Persistence
                 LinqToDBForEFTools.Initialize();
 
                 options.UseSqlServer(configuration.GetConnectionString("ConnectionToSql"),
-                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(10))
+                    optionsBuilder => optionsBuilder.EnableRetryOnFailure(12))
                   .UseLinqToDB();
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
 
-        public static IApplicationBuilder AddMigrate(this IApplicationBuilder app)
-        {
-            using var scope = app.ApplicationServices.CreateScope();
-
-            using var context = scope.ServiceProvider.GetRequiredService<HotelBookingPlatformDbContext>();
-
-            try
-            {
-                var pendingMigrations = context.Database.GetPendingMigrations();
-                if (pendingMigrations != null && pendingMigrations.Any())
-                {
-                    context.Database.Migrate();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while migrating the database: {ex.Message}");
-            }
-
-            return app;
-        }
         private static IServiceCollection AddHashing(this IServiceCollection services)
         {
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             return services;
         }
-        
+        private static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IAmenityRepository, AmenityRepository>()
+              .AddScoped<IBookingRepository, BookingRepository>()
+              .AddScoped<ICityRepository, CityRepository>()
+              .AddScoped<IDiscountRepository, DiscountRepository>()
+              .AddScoped<IHotelRepository, HotelRepository>()
+              .AddScoped<IImageRepository, ImageRepository>()
+              .AddScoped<IOwnerRepository, OwnerRepository>()
+              .AddScoped<IRoleRepository, RoleRepository>()
+              .AddScoped<IRoomClassRepository, RoomClassRepository>()
+              .AddScoped<IRoomRepository, RoomRepository>()
+              .AddScoped<IUserRepository, UserRepository>()
+              .AddScoped<IReviewRepository, ReviewRepository>();
+
+            return services;
+        }
+
     }
 }

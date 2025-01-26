@@ -12,6 +12,8 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="linq2db" Version="5.4.1" />
     <PackageReference Include="linq2db.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="MailKit" Version="4.9.0" />
+    <PackageReference Include="MailKit.NET" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.1">
@@ -19,19 +21,19 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
 	<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.1" />
+	<PackageReference Include="MimeKit" Version="4.9.0" />
+	<PackageReference Include="NReco.PdfGenerator" Version="1.2.1" />
+	<PackageReference Include="Supabase" Version="1.1.1" />
+	<PackageReference Include="Supabase.Postgrest" Version="4.0.3" />
 	<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
 	<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
