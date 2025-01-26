@@ -1,5 +1,5 @@
-﻿using Application.Interfaces.Authentication;
-using Domain.Entities;
+﻿using Domain.Entities;
+using Domain.Interfaces.Authentication;
 using Domain.Models;
 using Infrastructure.Authentication.JWT.Validator;
 using Microsoft.Extensions.Options;

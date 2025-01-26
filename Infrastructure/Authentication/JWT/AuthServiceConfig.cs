@@ -1,4 +1,4 @@
-﻿using Application.Interfaces.Authentication;
+﻿using Domain.Interfaces.Authentication;
 using FluentValidation;
 using Infrastructure.Authentication.JWT.Validator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
