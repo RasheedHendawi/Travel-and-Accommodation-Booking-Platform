@@ -12,7 +12,7 @@ namespace Infrastructure.Services.PDF
                 var htmlToPdfConverter = new HtmlToPdfConverter();
 
                 return htmlToPdfConverter.GeneratePdf(html);
-            }, );
+            });
         }
     }
 }
