@@ -1,6 +1,4 @@
-﻿
-
-namespace Application.Users
+﻿namespace Application.Users.Models
 {
     public class LoginResult
     {

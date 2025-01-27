@@ -1,4 +1,4 @@
-﻿using Application.Users;
+﻿using Application.Users.Models;
 
 
 namespace Application.Contracts

@@ -4,6 +4,7 @@ using Domain.Interfaces.Authentication;
 using AutoMapper;
 using Domain.Entities;
 using Application.Contracts;
+using Application.Users.Models;
 
 
 namespace Application.Users

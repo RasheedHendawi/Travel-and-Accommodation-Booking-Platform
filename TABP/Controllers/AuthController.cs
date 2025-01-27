@@ -1,5 +1,5 @@
 ﻿using Application.Contracts;
-using Application.Users;
+using Application.Users.Models;
 using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
