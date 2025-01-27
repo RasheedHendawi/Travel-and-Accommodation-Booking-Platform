@@ -12,7 +12,7 @@ namespace Infrastructure.Services.SupabaseImage
             services.AddScoped<IValidator<SupabaseConfig>, SupabaseValidator>();
 
             services.AddOptions<SupabaseConfig>()
-                .BindConfiguration(nameof(SupabaseConfig))
+                .BindConfiguration("Supabase")
                 .FluentValidation()
                 .ValidateOnStart();
 
