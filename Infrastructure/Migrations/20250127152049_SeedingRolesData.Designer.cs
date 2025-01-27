@@ -4,6 +4,7 @@ using Infrastructure.Persistence.ContextDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(HotelBookingPlatformDbContext))]
-    partial class HotelBookingPlatformDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250127152049_SeedingRolesData")]
+    partial class SeedingRolesData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -487,16 +490,6 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f403d2ed-7f0d-499c-a6e9-7e3d751f842a"),
-                            Email = "Admin@hotelManager.com",
-                            FirstName = "Super",
-                            LastName = "Admin",
-                            Password = "AQAAAAIAAYagAAAAEMcAhymzoRbYY1s8WP2AWcrQV3CHk35ny+1XHcuYxyfVqKIy5IaRVHzHa4SqBJOzFQ=="
-                        });
                 });
 
             modelBuilder.Entity("UserRole", b =>
@@ -512,13 +505,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRole");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = new Guid("c23401af-cbb8-4b73-8d6f-ecbb5e31d3b7"),
-                            UserId = new Guid("f403d2ed-7f0d-499c-a6e9-7e3d751f842a")
-                        });
                 });
 
             modelBuilder.Entity("AmenityRoomClass", b =>
