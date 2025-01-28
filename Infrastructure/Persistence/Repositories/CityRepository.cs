@@ -56,6 +56,8 @@ namespace Infrastructure.Persistence.Repositories
                     CreatedAt = c.CreatedAt,
                     UpdatedAt = c.UpdatedAt
                 });
+
+
             var tmpItems = await queryable.GetPage(query.PageNumber, query.PageSize).ToListAsync();
             return new PaginatedList<CityForManagement>(tmpItems,
                 await queryable.GetPaginationDataAsync(
