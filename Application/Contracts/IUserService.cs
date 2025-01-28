@@ -1,11 +1,11 @@
-﻿using Application.Users.Models;
+﻿using Application.DTOs.Users;
 
 
 namespace Application.Contracts
 {
     public interface IUserService
     {
-        Task<LoginResult> LoginAsync(string email, string password);
-        Task RegisterGuestAsync(RegisterHandler registerRequest);
+        Task<LoginResponse> LoginAsync(string email, string password);
+        Task RegisterGuestAsync(RegisterRequest registerRequest);
     }
 }
