@@ -1,4 +1,4 @@
-﻿namespace TABP.DTOs.Users
+﻿namespace Application.DTOs.Users
 {
     public class LoginRequest
     {

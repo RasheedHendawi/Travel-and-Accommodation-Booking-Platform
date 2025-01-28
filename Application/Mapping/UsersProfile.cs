@@ -1,4 +1,4 @@
-﻿using Application.Users.Models;
+﻿using Application.DTOs.Users;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Models;
@@ -9,8 +9,8 @@ namespace Application.Mapping
     {
         public UsersProfile()
         {
-            CreateMap<RegisterHandler, User>();
-            CreateMap<JwtToken, LoginResult>();
+            CreateMap<RegisterRequest, User>();
+            CreateMap<JwtToken, LoginResponse>();
         }
     }
 }

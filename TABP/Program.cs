@@ -1,7 +1,6 @@
 using Application;
 using Infrastructure;
 using Serilog;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,6 @@ builder.Services
     .AddControllers();
 
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 var app = builder.Build();
 
 app.UseExceptionHandler("/error");

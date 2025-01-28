@@ -224,3 +224,7 @@ System.InvalidOperationException: The exception handler configured on ExceptionH
 2025-01-27 18:35:40.455 +02:00 [INF] HTTP POST /api/auth/login responded 401 in 255.7744 ms
 2025-01-27 18:36:01.578 +02:00 [INF] HTTP GET / responded 404 in 23.1086 ms
 2025-01-27 18:36:22.455 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 1815.8350 ms
+2025-01-27 23:53:23.975 +02:00 [INF] HTTP GET / responded 404 in 71.2944 ms
+2025-01-27 23:56:30.888 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 2809.3245 ms
+2025-01-27 23:57:22.130 +02:00 [INF] HTTP GET /api/cities responded 401 in 13.4297 ms
+2025-01-27 23:59:03.350 +02:00 [INF] HTTP POST /api/cities responded 401 in 9.4086 ms

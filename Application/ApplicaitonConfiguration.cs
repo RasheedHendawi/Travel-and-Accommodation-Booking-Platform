@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Application.Cities;
 using Application.Contracts;
 using Application.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Application
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICityService, CityService>();
         }
     }
 }

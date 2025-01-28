@@ -10,7 +10,7 @@ namespace Infrastructure.Utilites
           this IQueryable<TItem> queryable,
           int pageNumber, int pageSize)
         {
-            return queryable.Skip(pageSize * (pageNumber - 1))
+            return queryable.Skip(pageSize * (pageNumber-1))
               .Take(pageSize);
         }
 

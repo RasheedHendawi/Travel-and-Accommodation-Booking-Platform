@@ -4,7 +4,7 @@ using Domain.Interfaces.Authentication;
 using AutoMapper;
 using Domain.Entities;
 using Application.Contracts;
-using Application.Users.Models;
+using Application.DTOs.Users;
 
 
 namespace Application.Users
@@ -31,19 +31,20 @@ namespace Application.Users
             _mapper = mapper;
         }
 
-        public async Task<LoginResult> LoginAsync(string email, string password)
+        public async Task<LoginResponse> LoginAsync(string email, string password)
         {
             var user = await _userRepository.AuthenticateAsync(email, password)
                        ?? throw new Exception("Creadtionals not Valid");
 
             var token = _jwtGenerator.GenerateToken(user);
 
-            return _mapper.Map<LoginResult>(token);
+            return _mapper.Map<LoginResponse>(token);
         }
 
-        public async Task RegisterGuestAsync(RegisterHandler registerRequest)
+        public async Task RegisterGuestAsync(RegisterRequest registerRequest)
         {
-            var role = await _roleRepository.GetByNameAsync(registerRequest.Role)
+            var defaultRole = "Guest";
+            var role = await _roleRepository.GetByNameAsync(defaultRole)
                        ?? throw new Exception("Invalid Role");
 
             if (await _userRepository.ExistsByEmailAsync(registerRequest.Email))

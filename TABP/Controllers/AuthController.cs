@@ -1,9 +1,8 @@
 ﻿using Application.Contracts;
-using Application.Users.Models;
+using Application.DTOs.Users;
 using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TABP.DTOs.Users;
 
 namespace TABP.Controllers;
 
@@ -52,8 +51,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var registerGuestRequest = _mapper.Map<RegisterHandler>(registerRequest);
-            await _userService.RegisterGuestAsync(registerGuestRequest);
+            await _userService.RegisterGuestAsync(registerRequest);
             return NoContent();
         }
         catch (Exception ex)
