@@ -1,5 +1,4 @@
-﻿using Application.Cities.Models;
-using Application.DTOs.Cities;
+﻿using Application.DTOs.Cities;
 using Application.DTOs.Images;
 using Domain.Models;
 

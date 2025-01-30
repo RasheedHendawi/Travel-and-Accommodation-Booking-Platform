@@ -1,5 +1,4 @@
-﻿using Application.Cities.Models;
-using Application.Contracts;
+﻿using Application.Contracts;
 using Application.DTOs.Cities;
 using Application.DTOs.Images;
 using AutoMapper;
@@ -110,7 +109,6 @@ namespace Application.Cities
             {
                 throw new Exception($"Not Found {id}");
             }
-
             await _imageRepository.DeleteAsync(id, ImageType.Thumbnail);
             await _imageRepository.CreateAsync(request.Image, id, ImageType.Thumbnail);
             await _unitOfWork.SaveChangesAsync();
