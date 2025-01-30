@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Application.Amenities;
 using Application.Cities;
 using Application.Contracts;
 using Application.Hotels;
@@ -25,6 +26,7 @@ namespace Application
             services.AddScoped<IOwnerService, OwnerService>();
             services.AddScoped<IHotelService, HotelsService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IAmenityService, AmenityService>();
         }
     }
 }

@@ -4,7 +4,7 @@ using Application.DTOs.Reviews;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TABP.Api.Controllers
+namespace TABP.Controllers
 {
     [ApiController]
     [Route("api/hotels/{hotelId:guid}/reviews")]
