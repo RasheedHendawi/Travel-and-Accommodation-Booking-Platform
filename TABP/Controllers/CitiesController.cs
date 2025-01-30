@@ -1,5 +1,4 @@
-﻿using Application.Cities.Models;
-using Application.Contracts;
+﻿using Application.Contracts;
 using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -31,10 +30,9 @@ namespace TABP.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CityForManagementResponse>>> GetCitiesForManagement(
-            [FromQuery] CitiesGetRequest request)
+            [FromQuery] CitiesGetHandler request)
         {
-            var tmoRequest = _mapper.Map<CitiesGetHandler>(request);
-            var cities = await _cityService.GetCitiesForManagementAsync(tmoRequest);
+            var cities = await _cityService.GetCitiesForManagementAsync(request);
             Response.Headers.AddPaginationData(cities.PaginationMetadata);
 
             return Ok(cities.Items);
