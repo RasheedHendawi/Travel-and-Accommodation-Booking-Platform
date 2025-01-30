@@ -1,13 +1,11 @@
 ﻿using Domain.Enums;
 
-
-namespace Application.Cities.Models
+namespace Application.DTOs.Hotels
 {
-    public class CitiesGetHandler
+    public class ReviewsGetRequest
     {
-        public string? SearchTerm { get; init; }
-        public SortMethod? SortOrder { get; init; }
         public string? SortColumn { get; init; }
+        public SortMethod? SortOrder { get; init; }
         public int PageNumber { get; init; } = 1;
         public int PageSize { get; init; } = 10;
     }

@@ -1,6 +1,9 @@
 ﻿using System.Reflection;
 using Application.Cities;
 using Application.Contracts;
+using Application.Hotels;
+using Application.Owners;
+using Application.Reviews;
 using Application.Users;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +22,9 @@ namespace Application
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddScoped<IHotelService, HotelsService>();
+            services.AddScoped<IReviewService, ReviewService>();
         }
     }
 }

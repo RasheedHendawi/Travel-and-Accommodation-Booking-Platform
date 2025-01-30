@@ -20,7 +20,7 @@ namespace Infrastructure.Persistence.Repositories
                 Path = imageModel.Path,
                 Type = type
             };
-            var CreatedImage = await context.Images.AddAsync(imageModel);
+            var CreatedImage = await context.Images.AddAsync(returnedImage);
             return CreatedImage.Entity;
         }
 
