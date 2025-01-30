@@ -26,7 +26,7 @@ namespace Infrastructure.Persistence.Configuration
                         Id = new Guid("f403d2ed-7f0d-499c-a6e9-7e3d751f842a"),
                         FirstName = "Super",
                         LastName = "Admin",
-                        Email = "Admin@hotelManager.com",
+                        Email = "Admin@hotelmanager.com",
                         Password= "AQAAAAIAAYagAAAAEMcAhymzoRbYY1s8WP2AWcrQV3CHk35ny+1XHcuYxyfVqKIy5IaRVHzHa4SqBJOzFQ=="
                     }
                 ]);
