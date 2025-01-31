@@ -4,6 +4,7 @@ using Asp.Versioning;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TABP.Utilites;
 
 namespace TABP.Controllers
 {
@@ -25,7 +26,8 @@ namespace TABP.Controllers
         public async Task<ActionResult<IEnumerable<AmenityResponse>>> GetAmenities([FromQuery] AmenitiesGetRequest request)
         {
             var amenities = await _amenityService.GetAmenitiesAsync(request);
-            return Ok(amenities);
+            Response.Headers.AddPaginationData(amenities.PaginationMetadata);
+            return Ok(amenities.Items);
         }
 
         [HttpGet("{id:guid}")]
