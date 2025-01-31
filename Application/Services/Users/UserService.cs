@@ -7,7 +7,7 @@ using Application.Contracts;
 using Application.DTOs.Users;
 
 
-namespace Application.Users
+namespace Application.Services.Users
 {
     public class UserService : IUserService
     {

@@ -11,7 +11,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using System.Linq.Expressions;
 
-namespace Application.Hotels
+namespace Application.Services.Hotels
 {
     public class HotelsService : IHotelService
     {

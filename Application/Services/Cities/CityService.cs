@@ -9,7 +9,7 @@ using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
 using System.Linq.Expressions;
 
-namespace Application.Cities
+namespace Application.Services.Cities
 {
     public class CityService : ICityService
     {

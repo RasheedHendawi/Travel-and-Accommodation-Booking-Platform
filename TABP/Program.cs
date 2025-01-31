@@ -1,6 +1,8 @@
 using Application;
+using Domain.Interfaces;
 using Infrastructure;
 using Serilog;
+using TABP.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
     .AddControllers();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IHttpUserContextAccessor, HttpUserContextAccessor>();
+
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();

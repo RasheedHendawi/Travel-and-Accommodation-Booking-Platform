@@ -1,10 +1,13 @@
 ﻿using System.Reflection;
-using Application.Cities;
 using Application.Contracts;
-using Application.Hotels;
-using Application.Owners;
-using Application.Reviews;
-using Application.Users;
+using Application.Services.Amenities;
+using Application.Services.Cities;
+using Application.Services.Discounts;
+using Application.Services.Hotels;
+using Application.Services.Owners;
+using Application.Services.Reviews;
+using Application.Services.RoomClasses;
+using Application.Services.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -25,6 +28,9 @@ namespace Application
             services.AddScoped<IOwnerService, OwnerService>();
             services.AddScoped<IHotelService, HotelsService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IAmenityService, AmenityService>();
+            services.AddScoped<IRoomClassService, RoomClassService>();
+            services.AddScoped<IDiscountService, DiscountService>();
         }
     }
 }

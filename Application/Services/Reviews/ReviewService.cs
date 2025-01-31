@@ -11,7 +11,7 @@ using Domain.Models;
 using System.Security.Claims;
 using System.Threading;
 
-namespace Application.Reviews
+namespace Application.Services.Reviews
 {
     public class ReviewService : IReviewService
     {

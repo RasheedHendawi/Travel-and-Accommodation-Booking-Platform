@@ -8,7 +8,7 @@ using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
 using System.Linq.Expressions;
 
-namespace Application.Owners
+namespace Application.Services.Owners
 {
     public class OwnerService : IOwnerService
     {
