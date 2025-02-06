@@ -13,7 +13,7 @@ namespace TABP.Controllers
     [ApiController]
     [Route("api/cities")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class CitiesController : ControllerBase
     {
         private readonly ICityService _cityService;

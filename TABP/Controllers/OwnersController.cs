@@ -2,6 +2,7 @@
 using Application.DTOs.Owners;
 using Asp.Versioning;
 using AutoMapper;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TABP.Utilites;
@@ -10,7 +11,7 @@ namespace TABP.Controllers
 {
     [ApiController]
     [Route("api/owners")]
-    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     [ApiVersion("1.0")]
     public class OwnersController : ControllerBase
     {

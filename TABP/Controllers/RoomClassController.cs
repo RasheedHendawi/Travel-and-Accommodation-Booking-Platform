@@ -14,7 +14,7 @@ namespace TABP.Controllers
     [ApiController]
     [Route("api/room-classes")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class RoomClassController(IRoomClassService roomClassService) : ControllerBase
     {
         private readonly IRoomClassService _roomClassService = roomClassService;

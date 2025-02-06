@@ -3,6 +3,7 @@ using Application.DTOs.Hotels;
 using Application.DTOs.Images;
 using Asp.Versioning;
 using AutoMapper;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace TABP.Controllers
     [ApiController]
     [Route("api/hotels")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class HotelsController : ControllerBase
     {
         private readonly IHotelService _hotelsService;

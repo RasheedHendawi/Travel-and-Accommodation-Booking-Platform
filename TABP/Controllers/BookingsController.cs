@@ -12,7 +12,7 @@ namespace TABP.Controllers
     [ApiController]
     [Route("api/user/bookings")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Guest)]
+    [Authorize(Roles = UserRoles.Guest)]
     public class BookingsController(IBookingsService bookingService) : ControllerBase
     {
         /// <summary>

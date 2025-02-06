@@ -2,16 +2,18 @@
 using Application.DTOs.Hotels;
 using Application.DTOs.Reviews;
 using Asp.Versioning;
+using Domain.Entities;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TABP.Utilites;
 
 namespace TABP.Controllers
 {
     [ApiController]
     [Route("api/hotels/{hotelId:guid}/reviews")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Guest)]
+    [Authorize(Roles = UserRoles.Guest)]
     public class ReviewsController : ControllerBase
     {
         private readonly IReviewService _reviewService;
@@ -26,7 +28,8 @@ namespace TABP.Controllers
         public async Task<IActionResult> GetReviewsForHotel(Guid hotelId, [FromQuery] ReviewsGetRequest request)
         {
             var reviews = await _reviewService.GetReviewsForHotelAsync(hotelId, request);
-            return Ok(reviews);
+            Response.Headers.AddPaginationData(reviews.PaginationMetadata);
+            return Ok(reviews.Items);
         }
 
         [HttpGet("{id:guid}")]

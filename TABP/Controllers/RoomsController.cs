@@ -12,7 +12,7 @@ namespace TABP.Controllers
     [ApiController]
     [Route("api/room-classes/{roomClassId:guid}/rooms")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class RoomsController(IRoomService roomService) : ControllerBase
     {
         [ProducesResponseType(StatusCodes.Status200OK)]

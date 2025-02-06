@@ -52,76 +52,65 @@ namespace Application.Services.Bookings
 
         public async Task<BookingResponse> CreateBookingAsync(BookingCreationRequest request)
         {
-            //if (!await _userRepository.ExistsByIdAsync(_httpUserContextAccessor.Id))
-            //{
-            //    throw new Exception("User Not Found");
-            //}
 
-            //if (_httpUserContextAccessor.Role != UserRoles.Guest)
-            //{
-            //    throw new Exception("Forbidden User (Not Guest)");
-            //}
+            if (!await _userRepository.ExistsByIdAsync(_httpUserContextAccessor.Id))
+            {
+                throw new Exception("User Not Found");
+            }
+
+            if (_httpUserContextAccessor.Role != UserRoles.Guest)
+            {
+                throw new Exception("Forbidden User (Not Guest)");
+            }
 
             var hotel = await _hotelRepository.GetByIdAsync(request.HotelId, true, false, false)
                         ?? throw new Exception("Hotel Not Found");
 
-            //await _unitOfWork.BeginTransactionAsync();
-            //try
-            {
-                var rooms = await ValidateRooms(request.RoomIds, request.HotelId, request.CheckIn, request.CheckOut);
+            var rooms = await ValidateRooms(request.RoomIds, request.HotelId, request.CheckIn, request.CheckOut);
 
-                var booking = new Booking
+            var booking = new Booking
+            {
+                Hotel = hotel,
+                Rooms = rooms,
+                GuestId = _httpUserContextAccessor.Id,
+                CheckIn = request.CheckIn,
+                CheckOut = request.CheckOut,
+                TotalPrice = CalculateTotalPrice(rooms, request.CheckIn, request.CheckOut),
+                BookingDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                GuestRemarks = request.GuestRemarks,
+                PaymentMethod = request.PaymentMethod
+            };
+
+            var createdBooking = await _bookingRepository.CreateAsync(booking);
+            foreach (var room in rooms)
+            {
+                var invoiceRecord = new InvoiceRecord
                 {
-                    Hotel = hotel,
-                    Rooms = rooms,
-                    //GuestId = _httpUserContextAccessor.Id,
-                    GuestId = new Guid("54D2C343-3E5F-417D-843A-D518BEE38659"),
-                    CheckIn = request.CheckIn,
-                    CheckOut = request.CheckOut,
-                    TotalPrice = CalculateTotalPrice(rooms, request.CheckIn, request.CheckOut),
-                    BookingDate = DateOnly.FromDateTime(DateTime.UtcNow),
-                    GuestRemarks = request.GuestRemarks,
-                    PaymentMethod = request.PaymentMethod
+                    RoomId = room.Id,
+                    Booking = createdBooking,
+                    RoomClassName = room.RoomClass.Name,
+                    RoomNumber = room.Number,
+                    Price = room.RoomClass.Price,
+                    DiscountPercentage = room.RoomClass.Discounts.FirstOrDefault()?.Percentage
                 };
 
-                var createdBooking = await _bookingRepository.CreateAsync(booking);
-                foreach (var room in rooms)
-                {
-                    var invoiceRecord = new InvoiceRecord
-                    {
-                        RoomId = room.Id,
-                        Booking = createdBooking,
-                        RoomClassName = room.RoomClass.Name,
-                        RoomNumber = room.Number,
-                        Price = room.RoomClass.Price,
-                        DiscountPercentage = room.RoomClass.Discounts.FirstOrDefault()?.Percentage
-                    };
+                createdBooking.Invoice.Add(invoiceRecord);
+            }
 
-                    createdBooking.Invoice.Add(invoiceRecord);
-                }
+            await _unitOfWork.SaveChangesAsync();
 
-                await _unitOfWork.SaveChangesAsync();
+            var invoiceHtmlToPdf = await _pdfService.GeneratePdfFromHtmlAsync(
+                InvoiceGenerator.GetInvocieHtml(createdBooking));
 
-                var invoiceHtmlToPdf = await _pdfService.GeneratePdfFromHtmlAsync(
-                    InvoiceGenerator.GetInvocieHtml(createdBooking));
-
-                await _emailService.SendEmailAsync(
-                    EmailRequests.GetEmailRequest("rrash22875@gmail.com",
-                    [ new AttachmentInvoice(
+            await _emailService.SendEmailAsync(
+                EmailRequests.GetEmailRequest(_httpUserContextAccessor.Email,
+                [ new AttachmentInvoice(
                         "invoice.pdf", invoiceHtmlToPdf, "application", "pdf")
-                    ]));
+                ]));
 
-                //await _unitOfWork.CommitTransactionAsync();
 
-                return _mapper.Map<BookingResponse>(createdBooking);
-            }
-            //catch
-            {
-                //await _unitOfWork.RollbackTransactionAsync();
-                //throw;
-            }
+            return _mapper.Map<BookingResponse>(createdBooking);
         }
-
 
         public async Task DeleteBookingAsync(Guid bookingId)
         {
@@ -139,16 +128,14 @@ namespace Application.Services.Bookings
 
         public async Task<byte[]> GetInvoiceAsPdfAsync(Guid bookingId)
         {
-            var x = new Guid("54D2C343-3E5F-417D-843A-D518BEE38659");
-            var booking = await _bookingRepository.GetByIdAsync(/*_httpUserContextAccessor.Id*/bookingId, x, true)
+            var booking = await _bookingRepository.GetByIdAsync(bookingId, _httpUserContextAccessor.Id, true)
                           ?? throw new Exception("Booking Not Found For Guest");
             return await _pdfService.GeneratePdfFromHtmlAsync(InvoiceGenerator.GetInvocieHtml(booking));
         }
 
         public async Task<BookingResponse> GetBookingAsync(Guid bookingId)
         {
-            var x = new Guid("54D2C343-3E5F-417D-843A-D518BEE38659");
-            var booking = await _bookingRepository.GetByIdAsync(/*_httpUserContextAccessor.Id*/bookingId, x, false)
+            var booking = await _bookingRepository.GetByIdAsync(bookingId, _httpUserContextAccessor.Id, false)
                           ?? throw new Exception("Booking Not Found For Guest");
 
             return _mapper.Map<BookingResponse>(booking);
@@ -158,8 +145,7 @@ namespace Application.Services.Bookings
         {
             var bookings = await _bookingRepository.GetAsync(
                 new Query<Booking>(
-                    //b => b.GuestId == _httpUserContextAccessor.Id,
-                    b => b.GuestId == new Guid("54D2C343-3E5F-417D-843A-D518BEE38659"),
+                    b => b.GuestId == _httpUserContextAccessor.Id,
                     request.SortOrder ?? SortMethod.Ascending,
                     request.SortColumn,
                     request.PageNumber,
@@ -177,7 +163,6 @@ namespace Application.Services.Bookings
             {
                 var room = await _roomRepository.GetByIdWithRoomClassAsync(roomId)
                             ?? throw new Exception("Room Not Found");
-                Console.WriteLine(roomId+"Hi");
 
                 if (room.RoomClass.HotelId != hotelId)
                 {

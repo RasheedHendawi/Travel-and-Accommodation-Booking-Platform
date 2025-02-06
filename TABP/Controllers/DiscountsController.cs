@@ -11,7 +11,7 @@ namespace TABP.Controllers
     [ApiController]
     [Route("api/room-classes/{roomClassId:guid}/discounts")]
     [ApiVersion("1.0")]
-    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class DiscountsController : ControllerBase
     {
         private readonly IDiscountService _discountService;
