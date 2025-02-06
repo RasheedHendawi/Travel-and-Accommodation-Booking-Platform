@@ -6,5 +6,5 @@ namespace Domain.Models
       IEnumerable<string> ToEmails,
       string Subject,
       string Body,
-      IEnumerable<Attachment> Attachments);
+      IEnumerable<AttachmentInvoice> Attachments);
 }
