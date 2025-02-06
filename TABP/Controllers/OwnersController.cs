@@ -10,7 +10,7 @@ namespace TABP.Controllers
 {
     [ApiController]
     [Route("api/owners")]
-    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = UserRoles.Admin)]
     [ApiVersion("1.0")]
     public class OwnersController : ControllerBase
     {

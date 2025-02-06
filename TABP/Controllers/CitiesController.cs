@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.DTOs.Cities;
 using Application.DTOs.Images;
 using TABP.Utilites;
+using Domain.Models;
 
 namespace TABP.Controllers
 {

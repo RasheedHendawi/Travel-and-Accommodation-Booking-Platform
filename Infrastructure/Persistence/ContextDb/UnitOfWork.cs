@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 
 namespace Infrastructure.Persistence.ContextDb
@@ -25,6 +26,10 @@ namespace Infrastructure.Persistence.ContextDb
             if (context.Database.CurrentTransaction is null) return;
 
             await context.Database.RollbackTransactionAsync();
+        }
+        public IExecutionStrategy CreateExecutionStrategy()
+        {
+            return context.Database.CreateExecutionStrategy();
         }
         public async Task<int> SaveChangesAsync()
         {

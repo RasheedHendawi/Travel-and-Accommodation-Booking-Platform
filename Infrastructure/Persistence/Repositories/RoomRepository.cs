@@ -89,8 +89,8 @@ namespace Infrastructure.Persistence.Repositories
                   IsAvailable = !r.Bookings.Any(
                   b => b.CheckIn >= currentDateUtc
                        && b.CheckOut <= currentDateUtc),
-                  CreatedAtUtc = r.CreatedAt,
-                  ModifiedAtUtc = r.UpdatedAt
+                  CreatedAt = r.CreatedAt,
+                  UpdatedAt = r.UpdatedAt
               });
 
             var itemsToReturn = await queryable

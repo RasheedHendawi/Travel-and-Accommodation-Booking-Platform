@@ -45,6 +45,7 @@ namespace Infrastructure.Persistence.Repositories
                 .Where(query.Filter).Sort(SortingExpressions.GetBookingSortExpression(query.SortColumn), query.SortOrder);
             var returnItem = await tmpQuery.GetPage(query.PageNumber, query.PageSize)
                 .AsNoTracking()
+                .Include(b => b.Hotel)
                 .ToListAsync();
             return new PaginatedList<Booking>(
                 returnItem,
@@ -59,7 +60,7 @@ namespace Infrastructure.Persistence.Repositories
 
         public Task<Booking?> GetByIdAsync(Guid id, Guid guestId, bool includeInvoice = false)
         {
-            var tmpBooking = context.Bookings.Where(x => x.Id == id && x.GuestId == guestId).Include(x => x.Hotel);
+            var tmpBooking = context.Bookings.Where(u => u.Id == id && u.GuestId == guestId).Include(b => b.Hotel).ThenInclude(h => h.City);
             if (includeInvoice)
             {
                 tmpBooking.Include(x => x.Invoice);

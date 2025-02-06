@@ -1,7 +1,6 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Hotels;
 using Application.DTOs.Images;
-using Application.Hotels;
 using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;

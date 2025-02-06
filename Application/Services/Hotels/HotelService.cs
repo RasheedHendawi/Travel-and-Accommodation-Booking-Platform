@@ -8,7 +8,6 @@ using Domain.Enums;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
-using Microsoft.AspNetCore.Http;
 using System.Linq.Expressions;
 
 namespace Application.Services.Hotels

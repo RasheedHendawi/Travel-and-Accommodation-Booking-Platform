@@ -12,12 +12,10 @@ namespace TABP.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
-    private readonly IMapper _mapper;
 
-    public AuthController(IUserService userService, IMapper mapper)
+    public AuthController(IUserService userService)
     {
         _userService = userService;
-        _mapper = mapper;
     }
 
     /// <summary>

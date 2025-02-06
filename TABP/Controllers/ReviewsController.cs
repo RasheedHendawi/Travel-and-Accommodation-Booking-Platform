@@ -1,6 +1,8 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Hotels;
 using Application.DTOs.Reviews;
+using Asp.Versioning;
+using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +10,8 @@ namespace TABP.Controllers
 {
     [ApiController]
     [Route("api/hotels/{hotelId:guid}/reviews")]
-    [Authorize(Roles = "Guest")]
+    [ApiVersion("1.0")]
+    //[Authorize(Roles = UserRoles.Guest)]
     public class ReviewsController : ControllerBase
     {
         private readonly IReviewService _reviewService;

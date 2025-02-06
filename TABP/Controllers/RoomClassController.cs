@@ -1,13 +1,20 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Images;
 using Application.DTOs.RoomClass;
+using Asp.Versioning;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TABP.Utilites;
 
 namespace TABP.Controllers
 {
+    [ApiController]
+    [Route("api/room-classes")]
+    [ApiVersion("1.0")]
+    //[Authorize(Roles = UserRoles.Admin)]
     public class RoomClassController(IRoomClassService roomClassService) : ControllerBase
     {
         private readonly IRoomClassService _roomClassService = roomClassService;

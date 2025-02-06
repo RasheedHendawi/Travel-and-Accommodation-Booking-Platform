@@ -10,6 +10,6 @@ namespace Application.DTOs.Rooms
     {
         public Guid RoomClassId { get; init; }
         public Guid RoomId { get; init; }
-        public string Number { get; init; }
+        public required string Number { get; init; }
     }
 }

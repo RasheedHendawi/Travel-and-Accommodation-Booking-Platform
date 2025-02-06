@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.DTOs.Amenities;
 using Application.DTOs.Images;
 using Application.DTOs.RoomClass;
 using AutoMapper;
@@ -47,7 +48,6 @@ namespace Application.Services.RoomClasses
               request.PageNumber,
               request.PageSize);
             var owners = await _roomClassRepository.GetAsync(query, false);
-
             return _mapper.Map<PaginatedList<RoomClassForManagementResponse>>(owners);
 
         }
@@ -60,8 +60,12 @@ namespace Application.Services.RoomClasses
         public async Task<RoomClassForManagementResponse> GetRoomClassByIdAsync(Guid id)
         {
             var roomClass = await _roomClassRepository.GetByIdAsync(id);
+            if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == id))
+            {
+                throw new Exception("RoomClass Not Found");
+            }
             var tmpRoom = _mapper.Map<RoomClassForManagementResponse>(roomClass);
-            return tmpRoom ?? throw new Exception("RoomClass Not Found");
+            return tmpRoom;
         }
 
 
@@ -77,7 +81,7 @@ namespace Application.Services.RoomClasses
                 throw new Exception("Name with Hotel Found");
             }
 
-            foreach (var amenityId in roomClass.Amenities)
+            foreach (var amenityId in roomClass.AmenitiesId)
             {
                 if (!await _amenityRepository.ExistAsync(a => a.Id == amenityId))
                 {
@@ -86,6 +90,10 @@ namespace Application.Services.RoomClasses
             }
 
             var roomClassObj = _mapper.Map<RoomClass>(roomClass);
+            foreach (var amenitieId in roomClass.AmenitiesId)
+            {
+                roomClassObj.Amenities.Add(await _amenityRepository.GetByIdAsync(amenitieId));
+            }
             var createdRoomClass = await _roomClassRepository.CreateAsync(roomClassObj);
             await _unitOfWork.SaveChangesAsync();
             return createdRoomClass.Id;

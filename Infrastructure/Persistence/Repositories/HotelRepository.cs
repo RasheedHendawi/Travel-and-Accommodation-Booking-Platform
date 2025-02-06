@@ -6,6 +6,7 @@ using Infrastructure.Persistence.ContextDb;
 using Infrastructure.Utilites;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Threading;
 
 
 namespace Infrastructure.Persistence.Repositories
@@ -36,14 +37,24 @@ namespace Infrastructure.Persistence.Repositories
         {
             var query = context.Hotels
                 .Where(h => h.Id == id);
-            if(includeCity)
+            if (includeCity)
+            {
                 query = query.Include(h => h.City);
+            }
             var hotel = await query.FirstOrDefaultAsync();
             if (hotel is null)
                 return hotel;
-            if(includeThmbnail)
+            if (includeThmbnail)
+            {
                 hotel.Thumbnail = await context.Images.FirstOrDefaultAsync(
-                    i => i.EntityId == hotel.Id && i.Type == Domain.Enums.ImageType.Thumbnail);
+                  i => i.EntityId == hotel.Id && i.Type == ImageType.Thumbnail);
+            }
+            if (includeGallary)
+            {
+                hotel.Gallery = await context.Images.Where(
+                    i => i.EntityId == hotel.Id && i.Type == ImageType.Gallery)
+                  .ToListAsync();
+            }
             return hotel;
         }
 

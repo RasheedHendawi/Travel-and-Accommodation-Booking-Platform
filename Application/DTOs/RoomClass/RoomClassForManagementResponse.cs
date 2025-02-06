@@ -13,7 +13,7 @@ namespace Application.DTOs.RoomClass
         public int AdultCapacity { get; init; }
         public int ChildCapacity { get; init; }
         public decimal Price { get; init; }
-        public IEnumerable<AmenityResponse> Amenities { get; init; }
+        public IEnumerable<AmenityResponse> Amenities { get; set; }
         public DiscountResponse? ActiveDiscount { get; init; }
         public DateTime CreatedAt { get; init; }
         public DateTime? UpdatedAt { get; init; }

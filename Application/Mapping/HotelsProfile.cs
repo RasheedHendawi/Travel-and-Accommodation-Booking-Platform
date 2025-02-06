@@ -11,8 +11,14 @@ namespace Application.Mapping
         {
             CreateMap<HotelCreationRequest, Hotel>();
             CreateMap<HotelUpdateRequest, Hotel>();
+
+            CreateMap<Hotel, HotelGetResponse>()
+                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
+                .ForMember(dest => dest.CountryName, opt => opt.MapFrom(src => src.City.Country))
+                .ForMember(dest => dest.ThumbnailUrl, opt => opt.MapFrom(src => src.Thumbnail != null ? src.Thumbnail.Path : null))
+                .ForMember(dest => dest.GalleryUrls, opt => opt.MapFrom(src => src.Gallery.Select(img => img.Path)));
+
             CreateMap<Hotel, HotelGetFromManagment>();
-            CreateMap<Hotel, HotelGetResponse>();
             CreateMap<HotelForManagement, HotelGetFromManagment>();
             CreateMap<Hotel, HotelSearchResponse>();
             CreateMap<RoomClass, HotelFeaturedDealResponse>();
