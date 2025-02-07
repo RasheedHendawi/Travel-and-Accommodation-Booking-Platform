@@ -1,0 +1,175 @@
+2025-02-07 00:00:53.904 +02:00 [ERR] HTTP POST /api/user/bookings responded 500 in 1255.5187 ms
+System.Exception: Not Authenticated
+   at TABP.Services.HttpUserContextAccessor.get_Email() in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Services\HttpUserContextAccessor.cs:line 16
+   at Application.Services.Bookings.BookingService.CreateBookingAsync(BookingCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 105
+   at TABP.Controllers.BookingsController.CreateBooking(BookingCreationRequest bookingCreationRequest) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\BookingsController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-02-07 00:00:53.914 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Exception: Not Authenticated
+   at TABP.Services.HttpUserContextAccessor.get_Email() in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Services\HttpUserContextAccessor.cs:line 16
+   at Application.Services.Bookings.BookingService.CreateBookingAsync(BookingCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 105
+   at TABP.Controllers.BookingsController.CreateBooking(BookingCreationRequest bookingCreationRequest) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\BookingsController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-02-07 00:15:30.101 +02:00 [INF] Executing TABP.Controllers.AuthController.Login (TABP) on controller TABP.Controllers.AuthController
+2025-02-07 00:15:31.427 +02:00 [INF] Action TABP.Controllers.AuthController.Login (TABP) finished execution on controller TABP.Controllers.AuthController
+2025-02-07 00:15:31.436 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 1674.7072 ms
+2025-02-07 00:15:51.668 +02:00 [INF] HTTP GET /api/cities responded 200 in 439.4245 ms
+2025-02-07 00:16:42.018 +02:00 [INF] HTTP GET /api/room-classes responded 200 in 984.2318 ms
+2025-02-07 00:16:55.211 +02:00 [INF] HTTP GET /api/room-classes/46dacff3-fad8-4266-a3f1-70a6f9eb7a54/rooms responded 200 in 54.1279 ms
+2025-02-07 00:17:39.636 +02:00 [INF] Executing TABP.Controllers.AuthController.Login (TABP) on controller TABP.Controllers.AuthController
+2025-02-07 00:17:39.726 +02:00 [INF] Action TABP.Controllers.AuthController.Login (TABP) finished execution on controller TABP.Controllers.AuthController
+2025-02-07 00:17:39.728 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 93.8043 ms
+2025-02-07 00:18:37.693 +02:00 [INF] Executing TABP.Controllers.AuthController.Login (TABP) on controller TABP.Controllers.AuthController
+2025-02-07 00:18:37.774 +02:00 [INF] Action TABP.Controllers.AuthController.Login (TABP) finished execution on controller TABP.Controllers.AuthController
+2025-02-07 00:18:37.777 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 87.9690 ms
+2025-02-07 00:19:07.030 +02:00 [INF] HTTP GET /api/room-classes responded 200 in 16.8805 ms
+2025-02-07 00:19:19.465 +02:00 [INF] HTTP GET /api/room-classes/46dacff3-fad8-4266-a3f1-70a6f9eb7a54/rooms responded 200 in 13.0041 ms
+2025-02-07 00:19:42.641 +02:00 [ERR] HTTP POST /api/room-classes/796c70c4-1d6d-455f-b177-c438a3aca2d5/rooms responded 500 in 19.0776 ms
+System.Exception: RoomClass Not Found
+   at Application.Services.Rooms.RoomService.CreateRoomAsync(Guid roomClassId, RoomCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Rooms\RoomService.cs:line 86
+   at TABP.Controllers.RoomsController.CreateRoomInRoomClass(Guid roomClassId, RoomCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\RoomsController.cs:line 60
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-02-07 00:19:42.665 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Exception: RoomClass Not Found
+   at Application.Services.Rooms.RoomService.CreateRoomAsync(Guid roomClassId, RoomCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Rooms\RoomService.cs:line 86
+   at TABP.Controllers.RoomsController.CreateRoomInRoomClass(Guid roomClassId, RoomCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\RoomsController.cs:line 60
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-02-07 00:19:59.504 +02:00 [INF] HTTP POST /api/room-classes/46DACFF3-FAD8-4266-A3F1-70A6F9EB7A54/rooms responded 204 in 126.2940 ms
+2025-02-07 00:20:46.500 +02:00 [INF] HTTP GET /api/room-classes/46dacff3-fad8-4266-a3f1-70a6f9eb7a54/rooms responded 200 in 12.7415 ms
+2025-02-07 00:21:45.151 +02:00 [INF] HTTP GET /api/room-classes responded 200 in 24.5788 ms
+2025-02-07 00:22:28.514 +02:00 [INF] Executing TABP.Controllers.AuthController.Login (TABP) on controller TABP.Controllers.AuthController
+2025-02-07 00:22:28.610 +02:00 [INF] Action TABP.Controllers.AuthController.Login (TABP) finished execution on controller TABP.Controllers.AuthController
+2025-02-07 00:22:28.612 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 99.0812 ms
+2025-02-07 00:23:41.201 +02:00 [ERR] HTTP POST /api/user/bookings responded 500 in 901.7704 ms
+System.Exception: Email not found
+   at TABP.Services.HttpUserContextAccessor.get_Email() in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Services\HttpUserContextAccessor.cs:line 31
+   at Application.Services.Bookings.BookingService.CreateBookingAsync(BookingCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 105
+   at TABP.Controllers.BookingsController.CreateBooking(BookingCreationRequest bookingCreationRequest) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\BookingsController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-02-07 00:23:41.207 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Exception: Email not found
+   at TABP.Services.HttpUserContextAccessor.get_Email() in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Services\HttpUserContextAccessor.cs:line 31
+   at Application.Services.Bookings.BookingService.CreateBookingAsync(BookingCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 105
+   at TABP.Controllers.BookingsController.CreateBooking(BookingCreationRequest bookingCreationRequest) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\BookingsController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-02-07 00:28:39.275 +02:00 [INF] Executing TABP.Controllers.AuthController.Login (TABP) on controller TABP.Controllers.AuthController
+2025-02-07 00:28:40.615 +02:00 [INF] Action TABP.Controllers.AuthController.Login (TABP) finished execution on controller TABP.Controllers.AuthController
+2025-02-07 00:28:40.624 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 1666.6751 ms
+2025-02-07 00:29:26.189 +02:00 [ERR] HTTP POST /api/user/bookings responded 500 in 310.1757 ms
+System.Exception: Room Not Available (93e9358a-dc1d-4a09-b4b9-5d12baff0b38)
+   at Application.Services.Bookings.BookingService.ValidateRooms(IEnumerable`1 roomIds, Guid hotelId, DateOnly checkInDate, DateOnly checkOutDate) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 177
+   at Application.Services.Bookings.BookingService.CreateBookingAsync(BookingCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 69
+   at TABP.Controllers.BookingsController.CreateBooking(BookingCreationRequest bookingCreationRequest) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\BookingsController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-02-07 00:29:26.208 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Exception: Room Not Available (93e9358a-dc1d-4a09-b4b9-5d12baff0b38)
+   at Application.Services.Bookings.BookingService.ValidateRooms(IEnumerable`1 roomIds, Guid hotelId, DateOnly checkInDate, DateOnly checkOutDate) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 177
+   at Application.Services.Bookings.BookingService.CreateBookingAsync(BookingCreationRequest request) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\Application\Services\Bookings\BookingsService.cs:line 69
+   at TABP.Controllers.BookingsController.CreateBooking(BookingCreationRequest bookingCreationRequest) in C:\Users\rrash\Desktop\FTS-Projects\Final\Travel-and-Accommodation-Booking-Platform\TABP\TABP\Controllers\BookingsController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-02-07 00:42:26.834 +02:00 [INF] Executing TABP.Controllers.AuthController.Login (TABP) on controller TABP.Controllers.AuthController
+2025-02-07 00:42:28.297 +02:00 [INF] Action TABP.Controllers.AuthController.Login (TABP) finished execution on controller TABP.Controllers.AuthController
+2025-02-07 00:42:28.306 +02:00 [INF] HTTP POST /api/auth/login responded 200 in 1804.0004 ms
+2025-02-07 00:43:09.131 +02:00 [INF] HTTP POST /api/user/bookings responded 201 in 4692.4318 ms
+2025-02-07 00:49:08.307 +02:00 [INF] HTTP GET /api/hotels/4411A435-DF83-49D7-8107-53A6A9A3AD29/reviews responded 200 in 1459.6395 ms
+2025-02-07 00:50:26.894 +02:00 [INF] HTTP POST /api/hotels/4411A435-DF83-49D7-8107-53A6A9A3AD29/reviews responded 401 in 7.2317 ms

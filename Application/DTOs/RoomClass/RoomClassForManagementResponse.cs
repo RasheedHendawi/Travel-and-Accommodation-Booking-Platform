@@ -1,7 +1,5 @@
-﻿
-
-using Application.DTOs.Amenities;
-using Application.DTOs.Discounts;
+﻿using Application.DTOs.Discounts;
+using Application.DTOs.Shared;
 
 namespace Application.DTOs.RoomClass
 {

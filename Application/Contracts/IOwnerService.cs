@@ -1,5 +1,6 @@
 ﻿
 using Application.DTOs.Owners;
+using Application.DTOs.Shared;
 using Domain.Models;
 
 namespace Application.Contracts

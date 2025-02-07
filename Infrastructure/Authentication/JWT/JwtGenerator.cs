@@ -20,6 +20,7 @@ namespace Infrastructure.Authentication.JWT
                 new("sub", user.Id.ToString()),
                 new("firstName", user.FirstName),
                 new("lastName", user.LastName),
+                new("email", user.Email)
             };
             claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)), SecurityAlgorithms.HmacSha256);

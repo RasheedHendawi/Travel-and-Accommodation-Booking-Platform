@@ -1,5 +1,5 @@
-﻿using Application.DTOs.Amenities;
-using Application.DTOs.RoomClass;
+﻿using Application.DTOs.RoomClass;
+using Application.DTOs.Shared;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Models;

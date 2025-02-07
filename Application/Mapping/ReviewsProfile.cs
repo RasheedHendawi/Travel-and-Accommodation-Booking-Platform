@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Hotels;
 using Application.DTOs.Reviews;
+using Application.DTOs.Shared;
 using AutoMapper;
 using Domain.Entities;
 

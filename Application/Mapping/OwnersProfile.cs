@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Owners;
+using Application.DTOs.Shared;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Models;

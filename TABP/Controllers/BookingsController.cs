@@ -1,5 +1,6 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Bookings;
+using Application.DTOs.Shared;
 using Asp.Versioning;
 using Azure;
 using Domain.Models;
@@ -9,6 +10,10 @@ using TABP.Utilites;
 
 namespace TABP.Controllers
 {
+    /// <summary>
+    ///     Controller for managing user bookings.
+    /// </summary>
+    /// <param name="bookingService"></param>
     [ApiController]
     [Route("api/user/bookings")]
     [ApiVersion("1.0")]
@@ -18,6 +23,8 @@ namespace TABP.Controllers
         /// <summary>
         /// Create a new booking for the current user.
         /// </summary>
+        /// <param name="bookingCreationRequest">The booking details.</param>
+        /// <returns>A newly created booking.</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -32,8 +39,10 @@ namespace TABP.Controllers
         }
 
         /// <summary>
-        /// Delete an existing booking specified by ID for the current user.
+        /// Deletes an existing booking specified by ID for the current user.
         /// </summary>
+        /// <param name="id">The unique identifier of the booking.</param>
+        /// <returns>No content if successful.</returns>
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -47,8 +56,10 @@ namespace TABP.Controllers
         }
 
         /// <summary>
-        /// Get the invoice of a booking as a PDF for the current user.
+        /// Gets the invoice of a booking as a PDF for the current user.
         /// </summary>
+        /// <param name="id">The unique identifier of the booking.</param>
+        /// <returns>The invoice PDF file.</returns>
         [HttpGet("{id:guid}/invoice")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -61,8 +72,10 @@ namespace TABP.Controllers
         }
 
         /// <summary>
-        /// Get a booking specified by ID for the current user.
+        /// Gets a booking specified by ID for the current user.
         /// </summary>
+        /// <param name="id">The unique identifier of the booking.</param>
+        /// <returns>The booking details.</returns>
         [HttpGet("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -75,8 +88,10 @@ namespace TABP.Controllers
         }
 
         /// <summary>
-        /// Get a page of bookings for the current user.
+        /// Gets a page of bookings for the current user.
         /// </summary>
+        /// <param name="bookingsGetRequest">The request parameters for fetching bookings.</param>
+        /// <returns>A list of bookings.</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

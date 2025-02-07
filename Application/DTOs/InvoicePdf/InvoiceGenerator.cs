@@ -10,7 +10,6 @@ namespace Application.DTOs.InvoicePdf
 
             var stringBuilder = new StringBuilder();
 
-            // Invoice HTML generation starts here
             stringBuilder.Append(
                 """
         <!DOCTYPE html>

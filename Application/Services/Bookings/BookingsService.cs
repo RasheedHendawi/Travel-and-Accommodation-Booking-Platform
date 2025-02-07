@@ -1,8 +1,7 @@
-﻿
-
-using Application.Contracts;
+﻿using Application.Contracts;
 using Application.DTOs.Bookings;
 using Application.DTOs.InvoicePdf;
+using Application.DTOs.Shared;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -11,8 +10,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
-using System.Net.Mail;
-using System.Threading;
+
 
 namespace Application.Services.Bookings
 {
@@ -101,7 +99,7 @@ namespace Application.Services.Bookings
 
             var invoiceHtmlToPdf = await _pdfService.GeneratePdfFromHtmlAsync(
                 InvoiceGenerator.GetInvocieHtml(createdBooking));
-
+            Console.WriteLine("Invoic"+ _httpUserContextAccessor.Email);
             await _emailService.SendEmailAsync(
                 EmailRequests.GetEmailRequest(_httpUserContextAccessor.Email,
                 [ new AttachmentInvoice(
