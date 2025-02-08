@@ -1,5 +1,4 @@
 ﻿using Application.Contracts;
-using Application.DTOs.Amenities;
 using Application.DTOs.Images;
 using Application.DTOs.RoomClass;
 using AutoMapper;
@@ -9,7 +8,6 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
 using System.Linq.Expressions;
-using System.Threading;
 
 namespace Application.Services.RoomClasses
 {

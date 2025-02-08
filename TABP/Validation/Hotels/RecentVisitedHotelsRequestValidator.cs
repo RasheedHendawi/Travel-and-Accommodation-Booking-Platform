@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿/*using FluentValidation;
 
 namespace TABP.Validation.Hotels
 {
@@ -6,3 +6,4 @@ namespace TABP.Validation.Hotels
     {
     }
 }
+*/

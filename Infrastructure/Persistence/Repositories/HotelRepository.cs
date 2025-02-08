@@ -130,14 +130,11 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task UpdateReviewById(Guid id, double newRating)
         {
-            if (!await context.Hotels.AnyAsync(h => h.Id == id))
-            {
-                throw new Exception("Hotel with this Id not Found");
-            }
-            var hotelEntity = context.ChangeTracker.Entries<Hotel>().FirstOrDefault(e => e.Entity.Id == id)?.Entity
-                ?? new Hotel { Id = id };
+            var hotelEntity = await context.Hotels.FirstOrDefaultAsync(h => h.Id == id)
+                ?? throw new Exception("Hotel with this Id not Found");
             hotelEntity.ReviewsRating = newRating;
             context.Hotels.Update(hotelEntity);
         }
+
     }
 }
