@@ -90,6 +90,8 @@ namespace Infrastructure.Persistence.Repositories
         public async Task<RoomClass?> GetByIdAsync(Guid id)
         {
             return await context.RoomClasses
+                .Include(rc => rc.Amenities)
+                .Include(rc => rc.Discounts)
               .FirstOrDefaultAsync(rc => rc.Id == id);
         }
 

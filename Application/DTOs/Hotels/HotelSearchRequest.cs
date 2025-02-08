@@ -17,7 +17,7 @@ namespace Application.DTOs.Hotels
         public decimal? MinPrice { get; init; }
         public decimal? MaxPrice { get; init; }
         public int? MinStarRating { get; init; }
-        public IEnumerable<RoomType> RoomTypes { get; init; }
-        public IEnumerable<Guid> Amenities { get; init; }
+        public IEnumerable<RoomType>? RoomTypes { get; init; }
+        public IEnumerable<Guid>? Amenities { get; init; }
     }
 }

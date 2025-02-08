@@ -8,7 +8,6 @@ using Domain.Enums;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
-using Microsoft.AspNetCore.Http;
 using System.Linq.Expressions;
 
 namespace Application.Services.Hotels
@@ -125,14 +124,14 @@ namespace Application.Services.Hotels
             await _imageRepository.CreateAsync(request.Image, id, ImageType.Gallery);
             await _unitOfWork.SaveChangesAsync();
         }
-        public async Task<IEnumerable<HotelFeaturedDealResponse>> GetFeaturedDealsAsync(int count)
+        public async Task<IEnumerable<HotelFeaturedDealResponse>> GetFeaturedDealsAsync(FeaturedDealsRequest request)
         {
-            if (count <= 0)
+            if (request.Count <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), "Count must be greater than zero.");
+                throw new ArgumentOutOfRangeException(nameof(request.Count), "Count must be greater than zero.");
             }
 
-            var featuredDeals = await _roomClassRepository.GetFeaturedDealsAsync(count);
+            var featuredDeals = await _roomClassRepository.GetFeaturedDealsAsync(request.Count);
             return featuredDeals.Select(deal => _mapper.Map<HotelFeaturedDealResponse>(deal)).ToList();
         }
 

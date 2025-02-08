@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Amenities;
+using Application.DTOs.Shared;
 using Domain.Models;
 
 namespace Application.Contracts

@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 
 namespace Application.Helper
 {
-
     public static class ExpressionCombiner
     {
         public static Expression<Func<T, bool>> And<T>(

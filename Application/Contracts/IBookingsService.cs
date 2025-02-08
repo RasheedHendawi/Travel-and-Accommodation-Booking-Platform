@@ -1,6 +1,7 @@
 ﻿
 
 using Application.DTOs.Bookings;
+using Application.DTOs.Shared;
 using Domain.Models;
 
 namespace Application.Contracts

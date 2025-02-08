@@ -50,14 +50,14 @@ namespace Application.Services.Cities
             return new PaginatedList<CityForManagementResponse>(mappedItems, cities.PaginationMetadata);
         }
 
-        public async Task<IEnumerable<TrendingCityResponse>> GetTrendingCitiesAsync(int count)
+        public async Task<IEnumerable<TrendingCityResponse>> GetTrendingCitiesAsync(TrendingCityRequest request)
         {
-            if (count <= 0)
+            if (request.Count <= 0)
             {
                 throw new ArgumentException("Count must be greater than zero.");
             }
 
-            var cities = await _cityRepository.GetMostVisitedAsync(count);
+            var cities = await _cityRepository.GetMostVisitedAsync(request.Count);
             return _mapper.Map<IEnumerable<TrendingCityResponse>>(cities);
         }
 

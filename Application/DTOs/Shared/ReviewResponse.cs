@@ -1,6 +1,4 @@
-﻿
-
-namespace Application.DTOs.Reviews
+﻿namespace Application.DTOs.Shared
 {
     public class ReviewResponse
     {

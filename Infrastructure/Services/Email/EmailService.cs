@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 
 namespace Infrastructure.Services.Email
 {
@@ -21,7 +22,7 @@ namespace Infrastructure.Services.Email
                 await smtpClient.ConnectAsync(
                   _emailConfig.Server,
                   _emailConfig.Port,
-                  useSsl: true);
+                  SecureSocketOptions.StartTls);
 
                 await smtpClient.AuthenticateAsync(
                   _emailConfig.Username,
@@ -52,13 +53,9 @@ namespace Infrastructure.Services.Email
 
             if (emailRequest.Attachments != null)
             {
-                foreach (var attachment in emailRequest.Attachments)
+                foreach (var (fileName, file, mediaType, subMediaType) in emailRequest.Attachments)
                 {
-                    using var memoryStream = new MemoryStream();
-                    attachment.ContentStream.CopyTo(memoryStream);
-                    var fileBytes = memoryStream.ToArray();
-
-                    bodyBuilder.Attachments.Add(attachment.Name, fileBytes, ContentType.Parse(attachment.ContentType.MediaType));
+                    bodyBuilder.Attachments.Add(fileName, file, new ContentType(mediaType, subMediaType));
                 }
             }
 

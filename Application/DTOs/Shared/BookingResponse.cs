@@ -1,6 +1,4 @@
-﻿
-
-namespace Application.DTOs.Bookings
+﻿namespace Application.DTOs.Shared
 {
     public class BookingResponse
     {

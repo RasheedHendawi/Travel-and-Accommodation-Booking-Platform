@@ -1,4 +1,4 @@
-﻿using Application.DTOs.Bookings;
+﻿using Application.DTOs.Shared;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Models;

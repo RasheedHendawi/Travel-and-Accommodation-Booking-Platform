@@ -1,6 +1,4 @@
-﻿
-
-namespace Application.DTOs.Amenities
+﻿namespace Application.DTOs.Shared
 {
     public class AmenityResponse
     {

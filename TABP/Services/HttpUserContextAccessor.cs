@@ -6,14 +6,19 @@ namespace TABP.Services
 {
     public class HttpUserContextAccessor(IHttpContextAccessor httpContextAccessor) : IHttpUserContextAccessor
     {
-        public Guid Id => Guid.Parse(
-            httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier) ??
-            throw new Exception("Not Authenticated"));
+        private readonly ClaimsPrincipal? _user = httpContextAccessor.HttpContext?.User;
 
-        public string Role => httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Role) ??
-                              throw new Exception("Not Authenticated");
+        public Guid Id => _user?.Identity?.IsAuthenticated == true
+            ? Guid.Parse(_user.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new Exception("User ID not found"))
+            : throw new Exception("Not Authenticated");
 
-        public string Email => httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Email) ??
-                               throw new Exception("Not Authenticated");
+        public string Role => _user?.Identity?.IsAuthenticated == true
+            ? _user.FindFirstValue(ClaimTypes.Role) ?? throw new Exception("Role not found")
+            : throw new Exception("Not Authenticated");
+
+        public string Email => _user?.Identity?.IsAuthenticated == true
+            ? _user.FindFirstValue(ClaimTypes.Email) ?? throw new Exception("Email not found")
+            : throw new Exception("Not Authenticated");
     }
 }
+

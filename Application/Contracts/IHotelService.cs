@@ -6,7 +6,7 @@ namespace Application.Contracts
 {
     public interface IHotelService
     {
-        Task<IEnumerable<HotelFeaturedDealResponse>> GetFeaturedDealsAsync(int count);
+        Task<IEnumerable<HotelFeaturedDealResponse>> GetFeaturedDealsAsync(FeaturedDealsRequest request);
         Task<PaginatedList<HotelSearchResponse>> SearchAndFilterHotelsAsync(HotelSearchRequest request);
         Task SetHotelThumbnailAsync(Guid id, ImageCreationRequest image);
         Task AddImageToGalleryAsync(Guid id, ImageCreationRequest image);

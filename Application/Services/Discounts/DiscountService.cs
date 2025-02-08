@@ -71,7 +71,7 @@ namespace Application.Services.Discounts
                 throw new Exception("RoomClass Not Found");
             }
 
-            if (await _discountRepository.ExistsAsync(d => request.EndDate >= d.StartDate && request.StartDate <= d.EndDate))
+            if ( await _discountRepository.ExistsAsync(d => request.EndDate >= d.StartDate && request.StartDate <= d.EndDate))
             {
                 throw new Exception("Discount Intervals Conflict");
             }

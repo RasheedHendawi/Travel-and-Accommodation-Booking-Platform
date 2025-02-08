@@ -1,4 +1,4 @@
-﻿using Application.DTOs.Owners;
+﻿using Application.DTOs.Shared;
 
 namespace Application.DTOs.Hotels
 {

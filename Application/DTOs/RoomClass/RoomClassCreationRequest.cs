@@ -10,6 +10,6 @@ namespace Application.DTOs.RoomClass
         public int AdultCapacity { get; init; }
         public int ChildCapacity { get; init; }
         public decimal Price { get; init; }
-        public IEnumerable<Guid>? Amenities { get; init; }
+        public IEnumerable<Guid> AmenitiesId { get; init; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Application.DTOs.Owners
+﻿namespace Application.DTOs.Shared
 {
     public class OwnersResponse
     {

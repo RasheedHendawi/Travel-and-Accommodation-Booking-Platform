@@ -9,10 +9,11 @@ namespace Application.Mapping
     {
         public DiscountProfile()
         {
+            CreateMap<PaginatedList<Discount>, PaginatedList<DiscountResponse>>()
+                .ForMember(dst => dst.Items, options => options.MapFrom(src => src.Items));
             CreateMap<Discount, DiscountResponse>();
             CreateMap<DiscountCreationRequest, Discount>();
-            CreateMap<PaginatedList<Discount>, PaginatedList<Discount>>()
-             .ForMember(dst => dst.Items, options => options.MapFrom(src => src.Items));
+
         }
     }
 }
