@@ -1,6 +1,7 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Owners;
 using Application.DTOs.Shared;
+using Application.Exceptions.HotelExceptions;
 using Application.Services.Owners;
 using AutoMapper;
 using Domain.Entities;
@@ -66,7 +67,7 @@ namespace Application.Tests.Services.Owners
             var ownerId = Guid.NewGuid();
             _ownerRepositoryMock.Setup(repo => repo.GetByIdAsync(ownerId)).ReturnsAsync(null as Owner);
 
-            await Assert.ThrowsAsync<Exception>(async () => await _ownerService.GetOwnerByIdAsync(ownerId));
+            await Assert.ThrowsAsync<OwnerNotFoundException>(async () => await _ownerService.GetOwnerByIdAsync(ownerId));
         }
 
         [Fact]
@@ -112,7 +113,7 @@ namespace Application.Tests.Services.Owners
 
             _ownerRepositoryMock.Setup(repo => repo.GetByIdAsync(ownerId)).ReturnsAsync(null as Owner);
 
-            await Assert.ThrowsAsync<Exception>(async () => await _ownerService.UpdateOwnerAsync(ownerId, request));
+            await Assert.ThrowsAsync<OwnerNotFoundException>(async () => await _ownerService.UpdateOwnerAsync(ownerId, request));
         }
     }
 }

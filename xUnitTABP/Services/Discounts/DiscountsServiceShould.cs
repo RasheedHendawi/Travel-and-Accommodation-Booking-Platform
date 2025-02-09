@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Discounts;
+using Application.Exceptions.RoomExceptions;
 using Application.Services.Discounts;
 using AutoMapper;
 using Domain.Entities;
@@ -62,7 +63,7 @@ public class DiscountsServiceShould
         _roomClassRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<RoomClass, bool>>>()))
             .ReturnsAsync(false);
 
-        await Assert.ThrowsAsync<Exception>(() => _discountService.CreateDiscountAsync(roomClassId, request));
+        await Assert.ThrowsAsync<RoomClassNotFoundException>(() => _discountService.CreateDiscountAsync(roomClassId, request));
     }
 
     [Fact]
@@ -99,7 +100,7 @@ public class DiscountsServiceShould
         _roomClassRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<RoomClass, bool>>>()))
             .ReturnsAsync(false);
 
-        await Assert.ThrowsAsync<Exception>(() => _discountService.DeleteDiscountAsync(roomClassId, discountId));
+        await Assert.ThrowsAsync<RoomClassNotFoundException>(() => _discountService.DeleteDiscountAsync(roomClassId, discountId));
     }
 
     [Fact]

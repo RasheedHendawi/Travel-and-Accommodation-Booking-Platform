@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Hotels;
+using Application.Exceptions.HotelExceptions;
 using Application.Services.Hotels;
 using AutoMapper;
 using Domain.Entities;
@@ -55,7 +56,7 @@ public class HotelServiceShould
         _hotelRepositoryMock.Setup(repo => repo.GetByIdAsync(hotelId, true, true, true))
             .ReturnsAsync(null as Hotel);
 
-        await Assert.ThrowsAsync<Exception>(() => _service.GetHotelByIdAsync(hotelId));
+        await Assert.ThrowsAsync<HotelNotFoundException>(() => _service.GetHotelByIdAsync(hotelId));
     }
 
     [Fact]
@@ -85,7 +86,7 @@ public class HotelServiceShould
         _cityRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<City, bool>>>()))
             .ReturnsAsync(false);
 
-        await Assert.ThrowsAsync<Exception>(() => _service.CreateHotelAsync(request));
+        await Assert.ThrowsAsync<CityNotFoundException>(() => _service.CreateHotelAsync(request));
     }
 
     [Fact]
@@ -110,6 +111,6 @@ public class HotelServiceShould
         _hotelRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<Hotel, bool>>>()))
             .ReturnsAsync(false);
 
-        await Assert.ThrowsAsync<Exception>(() => _service.DeleteHotelAsync(hotelId));
+        await Assert.ThrowsAsync<HotelNotFoundException>(() => _service.DeleteHotelAsync(hotelId));
     }
 }

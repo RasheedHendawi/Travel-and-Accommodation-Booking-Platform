@@ -1,4 +1,6 @@
 ﻿using Application.DTOs.Rooms;
+using Application.Exceptions.GeneralExceptions;
+using Application.Exceptions.RoomExceptions;
 using Application.Services.Rooms;
 using AutoMapper;
 using Domain.Entities;
@@ -79,7 +81,7 @@ namespace Application.Tests.Services.Rooms
             _roomClassRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<RoomClass, bool>>>()))
                 .ReturnsAsync(false);
 
-            await Assert.ThrowsAsync<Exception>(() => _roomService.GetRoomsForManagementAsync(roomClassId, request));
+            await Assert.ThrowsAsync<EntityNotFoundException>(() => _roomService.GetRoomsForManagementAsync(roomClassId, request));
         }
 
         [Fact]
@@ -118,7 +120,7 @@ namespace Application.Tests.Services.Rooms
             _roomRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<Room, bool>>>()))
                 .ReturnsAsync(true);
 
-            await Assert.ThrowsAsync<Exception>(() => _roomService.CreateRoomAsync(roomClassId, request));
+            await Assert.ThrowsAsync<DuplicateRoomNumberException>(() => _roomService.CreateRoomAsync(roomClassId, request));
         }
 
         [Fact]
@@ -134,7 +136,7 @@ namespace Application.Tests.Services.Rooms
             _bookingRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<Booking, bool>>>()))
                 .ReturnsAsync(true);
 
-            await Assert.ThrowsAsync<Exception>(() => _roomService.DeleteRoomAsync(roomClassId, roomId));
+            await Assert.ThrowsAsync<DependencyDeletionException>(() => _roomService.DeleteRoomAsync(roomClassId, roomId));
         }
     }
 }

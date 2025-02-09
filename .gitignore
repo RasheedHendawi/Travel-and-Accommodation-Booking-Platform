@@ -15,3 +15,4 @@
 *.ide
 /TestResults
 /TABP/logs/log-20250208.txt
+*.txt

@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Users;
+using Application.Exceptions.UserExceptions;
 using Application.Services.Users;
 using AutoMapper;
 using Domain.Entities;
@@ -75,7 +76,7 @@ namespace Application.Tests.Services.Users
                 .Setup(repo => repo.AuthenticateAsync(email, password))
                 .ReturnsAsync(null as User);
 
-            await Assert.ThrowsAsync<Exception>(() => _userService.LoginAsync(email, password));
+            await Assert.ThrowsAsync<InvalidCredentialsException>(() => _userService.LoginAsync(email, password));
         }
 
         [Fact]
@@ -127,7 +128,7 @@ namespace Application.Tests.Services.Users
                 .Setup(repo => repo.ExistsByEmailAsync(registerRequest.Email))
                 .ReturnsAsync(true);
 
-            await Assert.ThrowsAsync<Exception>(() => _userService.RegisterGuestAsync(registerRequest));
+            await Assert.ThrowsAsync<DuplicateUserException>(() => _userService.RegisterGuestAsync(registerRequest));
         }
     }
 

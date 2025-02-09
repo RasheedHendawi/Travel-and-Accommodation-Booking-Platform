@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Cities;
 using Application.DTOs.Images;
+using Application.Exceptions.HotelExceptions;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -57,7 +58,7 @@ public class CityServiceShould
     {
         var request = new TrendingCityRequest { Count = 0 };
 
-        await Assert.ThrowsAsync<ArgumentException>(async () =>
+        await Assert.ThrowsAsync<Application.Exceptions.GeneralExceptions.ArgumentOutOfRangeException>(async () =>
             await _cityService.GetTrendingCitiesAsync(request));
     }
 
@@ -96,7 +97,7 @@ public class CityServiceShould
         _cityRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<City, bool>>>()))
             .ReturnsAsync(false);
 
-        await Assert.ThrowsAsync<Exception>(async () =>
+        await Assert.ThrowsAsync<CityNotFoundException>(async () =>
             await _cityService.DeleteCityAsync(Guid.NewGuid()));
     }
 

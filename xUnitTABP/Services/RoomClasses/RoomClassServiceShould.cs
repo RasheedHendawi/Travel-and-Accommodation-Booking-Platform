@@ -1,5 +1,7 @@
 ﻿using Application.DTOs.Images;
 using Application.DTOs.RoomClass;
+using Application.Exceptions.GeneralExceptions;
+using Application.Exceptions.RoomExceptions;
 using Application.Services.RoomClasses;
 using AutoMapper;
 using Domain.Entities;
@@ -93,7 +95,7 @@ namespace Application.Tests.Services.RoomClasses
             _roomClassRepositoryMock.Setup(repo => repo.ExistsAsync(It.IsAny<Expression<Func<RoomClass, bool>>>()))
                 .ReturnsAsync(false);
 
-            await Assert.ThrowsAsync<Exception>(() => _roomClassService.GetRoomClassByIdAsync(roomClassId));
+            await Assert.ThrowsAsync<EntityNotFoundException>(() => _roomClassService.GetRoomClassByIdAsync(roomClassId));
         }
 
         [Fact]
@@ -142,7 +144,7 @@ namespace Application.Tests.Services.RoomClasses
             _roomClassRepositoryMock.Setup(repo => repo.GetByIdAsync(roomClassId))
                 .ReturnsAsync(null as RoomClass);
 
-            await Assert.ThrowsAsync<Exception>(() => _roomClassService.DeleteRoomClassAsync(roomClassId));
+            await Assert.ThrowsAsync<RoomClassNotFoundException>(() => _roomClassService.DeleteRoomClassAsync(roomClassId));
         }
 
         [Fact]
@@ -181,7 +183,7 @@ namespace Application.Tests.Services.RoomClasses
             _roomClassRepositoryMock.Setup(repo => repo.ExistsAsync(rc => rc.Id == roomClassId))
                 .ReturnsAsync(false);
 
-            await Assert.ThrowsAsync<Exception>(() => _roomClassService.AddImageToRoomClassAsync(roomClassId, imageRequest));
+            await Assert.ThrowsAsync<RoomClassNotFoundException>(() => _roomClassService.AddImageToRoomClassAsync(roomClassId, imageRequest));
         }
         [Fact]
         public async Task ThrowExceptionWhenRoomClassNotFoundWhileUpdating()
@@ -190,7 +192,7 @@ namespace Application.Tests.Services.RoomClasses
             var updatedRoomClass = new RoomClassUpdateRequest { Name = "Class-A" };
             _roomClassRepositoryMock.Setup(repo => repo.GetByIdAsync(roomClassId))
                 .ReturnsAsync(null as RoomClass);
-            await Assert.ThrowsAsync<Exception>(() =>  _roomClassService.UpdateRoomClassAsync(roomClassId, updatedRoomClass));
+            await Assert.ThrowsAsync<RoomClassNotFoundException>(() =>  _roomClassService.UpdateRoomClassAsync(roomClassId, updatedRoomClass));
         }
         [Fact]
         public async Task ThrowExceptionWhenRoomClassNameFoundWithHotelWhileUpdating()
@@ -202,7 +204,7 @@ namespace Application.Tests.Services.RoomClasses
                 .ReturnsAsync(existingRoomClass);
             _roomClassRepositoryMock.Setup(repo =>repo.ExistsAsync(It.IsAny<Expression<Func<RoomClass, bool>>>()))
                 .ReturnsAsync(true);
-            await Assert.ThrowsAsync<Exception>(() => _roomClassService.UpdateRoomClassAsync(roomClassId, updatedRoomClass));
+            await Assert.ThrowsAsync<RoomClassWithHotelFound>(() => _roomClassService.UpdateRoomClassAsync(roomClassId, updatedRoomClass));
         }
     }
 

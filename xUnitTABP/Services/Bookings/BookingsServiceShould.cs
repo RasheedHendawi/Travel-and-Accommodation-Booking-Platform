@@ -1,6 +1,8 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Bookings;
 using Application.DTOs.Shared;
+using Application.Exceptions.BookingExceptions;
+using Application.Exceptions.UserExceptions;
 using Application.Services.Bookings;
 using AutoMapper;
 using Domain.Entities;
@@ -48,7 +50,7 @@ public class BookingServiceTests
 
         var request = new BookingCreationRequest { HotelId = Guid.NewGuid(), RoomIds = new List<Guid>() };
 
-        await Assert.ThrowsAsync<Exception>(() => _service.CreateBookingAsync(request));
+        await Assert.ThrowsAsync<UserNotFoundException>(() => _service.CreateBookingAsync(request));
     }
 
     [Fact]
@@ -60,7 +62,7 @@ public class BookingServiceTests
 
         var request = new BookingCreationRequest { HotelId = Guid.NewGuid(), RoomIds = new List<Guid>() };
 
-        await Assert.ThrowsAsync<Exception>(() => _service.CreateBookingAsync(request));
+        await Assert.ThrowsAsync<ForbiddenUserException>(() => _service.CreateBookingAsync(request));
     }
 
     [Fact]
@@ -85,7 +87,7 @@ public class BookingServiceTests
         _bookingRepositoryMock.Setup(br => br.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync(null as Booking);
 
-        await Assert.ThrowsAsync<Exception>(() => _service.DeleteBookingAsync(Guid.NewGuid()));
+        await Assert.ThrowsAsync<BookingNotFoundException>(() => _service.DeleteBookingAsync(Guid.NewGuid()));
     }
 
     [Fact]
@@ -95,6 +97,6 @@ public class BookingServiceTests
         _bookingRepositoryMock.Setup(br => br.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync(booking);
 
-        await Assert.ThrowsAsync<Exception>(() => _service.DeleteBookingAsync(Guid.NewGuid()));
+        await Assert.ThrowsAsync<BookingCancellationException>(() => _service.DeleteBookingAsync(Guid.NewGuid()));
     }
 }

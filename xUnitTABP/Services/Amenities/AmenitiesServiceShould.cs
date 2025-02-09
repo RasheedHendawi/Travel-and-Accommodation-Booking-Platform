@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Amenities;
 using Application.DTOs.Shared;
+using Application.Exceptions.HotelExceptions;
 using Application.Services.Amenities;
 using AutoMapper;
 using Domain.Entities;
@@ -61,7 +62,7 @@ namespace Application.Tests.Services.Amenities
             _amenityRepositoryMock.Setup(repo => repo.GetByIdAsync(amenityId))
                 .ReturnsAsync(null as Amenity);
 
-            await Assert.ThrowsAsync<Exception>(() => _amenityService.GetAmenityByIdAsync(amenityId));
+            await Assert.ThrowsAsync<AmenityNotFoundException>(() => _amenityService.GetAmenityByIdAsync(amenityId));
         }
 
         [Fact]
@@ -100,7 +101,7 @@ namespace Application.Tests.Services.Amenities
             _amenityRepositoryMock.Setup(repo => repo.ExistAsync(It.IsAny<Expression<Func<Amenity, bool>>>()))
                 .ReturnsAsync(true);
 
-            await Assert.ThrowsAsync<Exception>(() => _amenityService.CreateAmenityAsync(creationRequest));
+            await Assert.ThrowsAsync<AmenityWithNameFoundException>(() => _amenityService.CreateAmenityAsync(creationRequest));
         }
 
         [Fact]
@@ -140,7 +141,7 @@ namespace Application.Tests.Services.Amenities
             _amenityRepositoryMock.Setup(repo => repo.GetByIdAsync(amenityId))
                 .ReturnsAsync(null as Amenity);
                 
-            await Assert.ThrowsAsync<Exception>(() => _amenityService.UpdateAmenityAsync(amenityId, updateRequest));
+            await Assert.ThrowsAsync<AmenityNotFoundException>(() => _amenityService.UpdateAmenityAsync(amenityId, updateRequest));
         }
         [Fact]
         public async Task ReturnPaginatedListWhenValidRequest()
@@ -190,7 +191,7 @@ namespace Application.Tests.Services.Amenities
                 .ReturnsAsync(true); 
 
             
-            await Assert.ThrowsAsync<Exception>(() => _amenityService.UpdateAmenityAsync(amenityId, updateRequest));
+            await Assert.ThrowsAsync<AmenityWithNameFoundException>(() => _amenityService.UpdateAmenityAsync(amenityId, updateRequest));
         }
 
     }
