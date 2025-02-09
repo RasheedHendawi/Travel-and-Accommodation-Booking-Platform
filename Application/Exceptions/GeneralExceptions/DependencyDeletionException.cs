@@ -1,12 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.GeneralExceptions
 {
-    public class DependencyDeletionException : ExceptionsBase
+    public class DependencyDeletionException(string message) : BadRequestException(message)
     {
-        public DependencyDeletionException(string entityName, string dependencyName)
-            : base($"{entityName} has dependencies on {dependencyName}.")
-        {
-        }
+        public override string Header => "Dependency Deletion";
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.HotelExceptions
 {
-    public class DuplicateHotelException : ExceptionsBase
+    public class DuplicateHotelException(string message) : ConflictExceptions(message)
     {
-        public DuplicateHotelException() : base("A hotel at this location already exists.") { }
+        public override string Header => "Hotel already exists";
     }
 }

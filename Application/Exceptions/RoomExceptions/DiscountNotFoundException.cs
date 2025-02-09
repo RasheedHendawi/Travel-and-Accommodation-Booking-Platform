@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Exceptions.RoomExceptions
 {
-    public class DiscountNotFoundException : ExceptionsBase
+    public class DiscountNotFoundException(string message) : ExceptionsBase(message)
     {
-        public DiscountNotFoundException() : base("Discount Not Found In RoomClass")
-        {
-        }
+        public override string Header => "Discount not found";
     }
 }

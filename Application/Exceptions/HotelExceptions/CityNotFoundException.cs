@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Exceptions.ExceptionTypes;
 
 namespace Application.Exceptions.HotelExceptions
 {
-    public class CityNotFoundException : ExceptionsBase
+    public class CityNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public CityNotFoundException() : base("City not found !")
-        {
-        }
+        public override string Header => "City not found";
     }
 }

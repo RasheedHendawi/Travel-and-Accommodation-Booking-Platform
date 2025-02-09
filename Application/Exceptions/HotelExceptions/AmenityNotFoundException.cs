@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Exceptions.ExceptionTypes;
 
 namespace Application.Exceptions.HotelExceptions
 {
-    public class AmenityNotFoundException : ExceptionsBase
+    public class AmenityNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public AmenityNotFoundException() : base($"Amenity not found.")
-        {
-        }
+        public override string Header => "Amenity not found";
     }
 }

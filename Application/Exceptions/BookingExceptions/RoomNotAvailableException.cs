@@ -1,10 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.BookingExceptions
 {
-    public class RoomNotAvailableException : ExceptionsBase
+    public class RoomNotAvailableException(string message) : ConflictExceptions(message)
     {
-        public RoomNotAvailableException(Guid roomId)
-            : base($"Room not available ({roomId}).") { }
+        public override string Header => "Room not available";
     }
 }

@@ -57,16 +57,16 @@ namespace Application.Services.Bookings
 
             if (!await _userRepository.ExistsByIdAsync(_httpUserContextAccessor.Id))
             {
-                throw new UserNotFoundException();
+                throw new UserNotFoundException("User not found.");
             }
 
             if (_httpUserContextAccessor.Role != UserRoles.Guest)
             {
-                throw new ForbiddenUserException();
+                throw new ForbiddenUserException("Not guest !");
             }
 
             var hotel = await _hotelRepository.GetByIdAsync(request.HotelId, true, false, false)
-                        ?? throw new HotelNotFoundException();
+                        ?? throw new HotelNotFoundException("Hotel not found.");
 
             var rooms = await ValidateRooms(request.RoomIds, request.HotelId, request.CheckIn, request.CheckOut);
 
@@ -117,11 +117,11 @@ namespace Application.Services.Bookings
         public async Task DeleteBookingAsync(Guid bookingId)
         {
             var booking = await _bookingRepository.GetByIdAsync(bookingId)
-                          ?? throw new BookingNotFoundException();
+                          ?? throw new BookingNotFoundException("Booking not found for the guest.");
 
             if (booking.CheckIn <= DateOnly.FromDateTime(DateTime.UtcNow))
             {
-                throw new BookingCancellationException();
+                throw new BookingCancellationException("Cannot cancel booking.");
             }
 
             await _bookingRepository.DeleteAsync(bookingId);
@@ -131,14 +131,14 @@ namespace Application.Services.Bookings
         public async Task<byte[]> GetInvoiceAsPdfAsync(Guid bookingId)
         {
             var booking = await _bookingRepository.GetByIdAsync(bookingId, _httpUserContextAccessor.Id, true)
-                          ?? throw new BookingNotFoundException();
+                          ?? throw new BookingNotFoundException("Booking not found for the guest.");
             return await _pdfService.GeneratePdfFromHtmlAsync(InvoiceGenerator.GetInvocieHtml(booking));
         }
 
         public async Task<BookingResponse> GetBookingAsync(Guid bookingId)
         {
             var booking = await _bookingRepository.GetByIdAsync(bookingId, _httpUserContextAccessor.Id, false)
-                          ?? throw new BookingNotFoundException();
+                          ?? throw new BookingNotFoundException("Booking not found for the guest.");
 
             return _mapper.Map<BookingResponse>(booking);
         }
@@ -164,11 +164,11 @@ namespace Application.Services.Bookings
             foreach (var roomId in roomIds)
             {
                 var room = await _roomRepository.GetByIdWithRoomClassAsync(roomId)
-                            ?? throw new RoomNotFoundException();
+                            ?? throw new RoomNotFoundException("Room not found.");
 
                 if (room.RoomClass.HotelId != hotelId)
                 {
-                    throw new HotelNotFoundException();
+                    throw new HotelNotFoundException("Hotel not found.");
                 }
                 if (!await _roomRepository.ExistsAsync(
                       r => r.Id == roomId &&
@@ -176,7 +176,7 @@ namespace Application.Services.Bookings
                              b => checkInDate >= b.CheckOut ||
                                   checkOutDate <= b.CheckIn)))
                 {
-                    throw new RoomNotAvailableException(roomId);
+                    throw new RoomNotAvailableException("Room not available.");
                 }
                 rooms.Add(room);
             }

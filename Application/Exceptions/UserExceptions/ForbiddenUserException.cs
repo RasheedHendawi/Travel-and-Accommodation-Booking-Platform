@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.UserExceptions
 {
-    public class ForbiddenUserException : ExceptionsBase
+    public class ForbiddenUserException(string message) : ForbiddenException(message)
     {
-        public ForbiddenUserException() : base("Forbidden User (Not Guest).") { }
+        public override string Header => "Not Guest !";
     }
 }

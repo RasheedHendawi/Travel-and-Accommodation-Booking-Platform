@@ -43,7 +43,7 @@ namespace Application.Services.Amenities
         public async Task<AmenityResponse> GetAmenityByIdAsync(Guid id)
         {
             var amenity = await _amenityRepository.GetByIdAsync(id)
-                          ?? throw new AmenityNotFoundException ();
+                          ?? throw new AmenityNotFoundException("Amenity not found.");
             return _mapper.Map<AmenityResponse>(amenity);
         }
 
@@ -51,7 +51,7 @@ namespace Application.Services.Amenities
         {
             if (await _amenityRepository.ExistAsync(a => a.Name == request.Name))
             {
-                throw new AmenityWithNameFoundException();
+                throw new AmenityWithNameFoundException("Amenity with this name already exists.");
             }//may remove this check if we want to allow duplicate names
 
             var newAmenity = _mapper.Map<Amenity>(request);
@@ -64,11 +64,11 @@ namespace Application.Services.Amenities
         public async Task UpdateAmenityAsync(Guid id, AmenityUpdateRequest request)
         {
             var amenityEntity = await _amenityRepository.GetByIdAsync(id)
-                                 ?? throw new AmenityNotFoundException();
+                                 ?? throw new AmenityNotFoundException("Amenity not found.");
 
             if (await _amenityRepository.ExistAsync(a => a.Name == request.Name && a.Id != id))
             {
-                throw new AmenityWithNameFoundException();
+                throw new AmenityWithNameFoundException("Amenity with this name already exists.");
             }
 
             _mapper.Map(request, amenityEntity);

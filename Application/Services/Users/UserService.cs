@@ -35,7 +35,7 @@ namespace Application.Services.Users
         public async Task<LoginResponse> LoginAsync(string email, string password)
         {
             var user = await _userRepository.AuthenticateAsync(email, password)
-                       ?? throw new InvalidCredentialsException();
+                       ?? throw new InvalidCredentialsException("Credentials are not valid.");
 
             var token = _jwtGenerator.GenerateToken(user);
 
@@ -49,7 +49,7 @@ namespace Application.Services.Users
 
             if (await _userRepository.ExistsByEmailAsync(registerRequest.Email))
             {
-                throw new DuplicateUserException();
+                throw new DuplicateUserException("User with this email already exists.");
             }
 
             var user = _mapper.Map<User>(registerRequest);

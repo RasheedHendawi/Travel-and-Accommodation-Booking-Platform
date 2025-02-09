@@ -1,11 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.HotelExceptions
 {
-    public class OwnerNotFoundException : ExceptionsBase
+    public class OwnerNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public OwnerNotFoundException() : base("Owner not found !")
-        {
-        }
+        public override string Header => "Owner Not Found";
     }
 }

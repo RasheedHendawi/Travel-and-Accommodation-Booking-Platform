@@ -49,7 +49,7 @@ namespace Application.Services.Reviews
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             var query = new Query<Review>(
@@ -71,11 +71,11 @@ namespace Application.Services.Reviews
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             var review = await _reviewRepository.GetByIdAsync(hotelId, reviewId)
-                         ?? throw new HotelNotFoundException();
+                         ?? throw new HotelNotFoundException("Hotel not found.");
 
             return _mapper.Map<ReviewResponse>(review);
         }
@@ -86,22 +86,22 @@ namespace Application.Services.Reviews
 
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             if (!await _userRepository.ExistsByIdAsync(userId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             if (!await _bookingRepository.ExistsAsync(b => b.HotelId == hotelId && b.GuestId == userId))
             {
-                throw new BookingNotFoundException();
+                throw new BookingNotFoundException("Booking not found for the guest.");
             }
 
             if (await _reviewRepository.ExistsAsync(r => r.GuestId == userId && r.HotelId == hotelId))
             {
-                throw new GuestAlreadyReviewedException();
+                throw new GuestAlreadyReviewedException("Guest already reviewed this hotel.");
             }
 
             var newReview = _mapper.Map<Review>(request);
@@ -124,21 +124,21 @@ namespace Application.Services.Reviews
             var userId = _userAccessor.Id;
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             if (!await _userRepository.ExistsByIdAsync(userId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             if (_userAccessor.Role != UserRoles.Guest)
             {
-                throw new ForbiddenUserException();
+                throw new ForbiddenUserException("Not guest !");
             }
 
             var review = await _reviewRepository.GetByIdAsync(hotelId, reviewId, userId)
-                         ?? throw new HotelNotFoundException();
+                         ?? throw new HotelNotFoundException("Hotel not found.");
             var TotalRating = await _reviewRepository.GetTotalRatingForHotelAsync(hotelId);
             var TotalReviews = await _reviewRepository.GetReviewCountForHotelAsync(hotelId);
             TotalRating += request.Rating - review.Rating;
@@ -155,11 +155,11 @@ namespace Application.Services.Reviews
 
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             var review = await _reviewRepository.GetByIdAsync(hotelId, reviewId, userId)
-                         ?? throw new ReviewNotFoundException();
+                         ?? throw new ReviewNotFoundException("Review not found!");
 
             await _reviewRepository.DeleteAsync(reviewId);
             await _unitOfWork.SaveChangesAsync();

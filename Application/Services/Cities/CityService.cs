@@ -56,7 +56,7 @@ namespace Application.Services.Cities
         {
             if (request.Count <= 0)
             {
-                throw new ArgumentOutOfRangeException(request.Count.ToString());
+                throw new Exceptions.GeneralExceptions.ArgumentOutOfRangeException(request.Count.ToString());
             }
 
             var cities = await _cityRepository.GetMostVisitedAsync(request.Count);
@@ -67,7 +67,7 @@ namespace Application.Services.Cities
         {
             if (await _cityRepository.ExistsAsync(c => c.PostOffice == request.PostOffice))
             {
-                throw new CityWithPostofficeException();
+                throw new CityWithPostofficeException("City with postoffice");
             }
             var city = _mapper.Map<City>(request);
             await _cityRepository.CreateAsync(city);
@@ -78,11 +78,11 @@ namespace Application.Services.Cities
         {
             if (await _cityRepository.ExistsAsync(c => c.PostOffice == request.PostOffice))
             {
-                throw new CityWithPostofficeException();
+                throw new CityWithPostofficeException("City with postoffice");
             }
 
             var city = await _cityRepository.GetByIdAsync(id) ??
-                       throw new CityNotFoundException();
+                       throw new CityNotFoundException("City not found !");
 
             _mapper.Map(request, city);
             await _cityRepository.UpdateAsync(city);
@@ -93,12 +93,12 @@ namespace Application.Services.Cities
         {
             if (!await _cityRepository.ExistsAsync(c => c.Id == id))
             {
-                throw new CityNotFoundException();
+                throw new CityNotFoundException("City not found !");
             }
 
             if (await _hotelRepository.ExistsAsync(h => h.CityId == id))
             {
-                throw new DependencyDeletionException("City", "Hotel");
+                throw new DependencyDeletionException("City, Hotel");
             }
 
             await _cityRepository.DeleteAsync(id);
@@ -109,7 +109,7 @@ namespace Application.Services.Cities
         {
             if (!await _cityRepository.ExistsAsync(c => c.Id == id))
             {
-                throw new CityNotFoundException();
+                throw new CityNotFoundException("City not found !");
             }
             await _imageRepository.DeleteAsync(id, ImageType.Thumbnail);
             await _imageRepository.CreateAsync(request.Image, id, ImageType.Thumbnail);

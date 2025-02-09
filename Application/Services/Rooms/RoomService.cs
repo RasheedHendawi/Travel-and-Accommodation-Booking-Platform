@@ -39,7 +39,7 @@ namespace Application.Services.Rooms
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new EntityNotFoundException("RoomClass",roomClassId);
+                throw new EntityNotFoundException("RoomClass");
             }
 
             var query = new Query<Room>(
@@ -59,7 +59,7 @@ namespace Application.Services.Rooms
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new EntityNotFoundException("RoomClass", roomClassId);
+                throw new EntityNotFoundException("RoomClass");
             }
 
             var query = new Query<Room>(
@@ -79,12 +79,12 @@ namespace Application.Services.Rooms
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new EntityNotFoundException("RoomClass", roomClassId);
+                throw new EntityNotFoundException("RoomClass");
             }
 
             if (await _roomRepository.ExistsAsync(r => r.RoomClassId == roomClassId && r.Number == request.Number))
             {
-                throw new DuplicateRoomNumberException();
+                throw new DuplicateRoomNumberException("Room with this number already exists in the room class.");
             }
             var roomHandler = new CreateRoomHandler() { RoomClassId = roomClassId };
             _mapper.Map(request, roomHandler);
@@ -99,16 +99,16 @@ namespace Application.Services.Rooms
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new EntityNotFoundException("RoomClass", roomClassId);
+                throw new EntityNotFoundException("RoomClass");
             }
             if (await _roomRepository.ExistsAsync(
                    r => r.RoomClassId == roomClassId &&
                         r.Number == request.Number))
             {
-                throw new DuplicateRoomNumberException();
+                throw new DuplicateRoomNumberException("Room with this number already exists in the room class.");
             }
             var roomEntity = await _roomRepository.GetByIdAsync(roomClassId, id) ??
-                throw new RoomNotFoundException();
+                throw new RoomNotFoundException("Room not found.");
 
             var updatehandler = new UpdateRoomHandler
             {
@@ -126,16 +126,16 @@ namespace Application.Services.Rooms
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new EntityNotFoundException("RoomClass", roomClassId);
+                throw new EntityNotFoundException("RoomClass");
             }
 
             if (!await _roomRepository.ExistsAsync(r => r.Id == id && r.RoomClassId == roomClassId))
             {
-                throw new RoomNotFoundException();
+                throw new RoomNotFoundException("Room not found.");
             }
             if (await _bookingRepository.ExistsAsync(b => b.Rooms.Any(r => r.Id == id)))
             {
-                throw new DependencyDeletionException("Room", "Booking");
+                throw new DependencyDeletionException("Room, Booking");
             }
             await _roomRepository.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();

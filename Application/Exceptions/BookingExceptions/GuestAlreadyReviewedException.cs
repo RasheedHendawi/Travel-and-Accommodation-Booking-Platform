@@ -1,11 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.BookingExceptions
 {
-    public class GuestAlreadyReviewedException : ExceptionsBase
+    public class GuestAlreadyReviewedException(string message) : ConflictExceptions(message)
     {
-        public GuestAlreadyReviewedException() : base("Guest already reviewed this hotel.")
-        {
-        }
+        public override string Header => "Guest already reviewed";
     }
 }

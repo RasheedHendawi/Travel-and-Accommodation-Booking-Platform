@@ -63,7 +63,7 @@ namespace Application.Services.RoomClasses
             var roomClass = await _roomClassRepository.GetByIdAsync(id);
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == id))
             {
-                throw new EntityNotFoundException("RoomClass", id);
+                throw new EntityNotFoundException("RoomClass");
             }
             var tmpRoom = _mapper.Map<RoomClassForManagementResponse>(roomClass);
             return tmpRoom;
@@ -74,7 +74,7 @@ namespace Application.Services.RoomClasses
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == roomClass.HotelId))
             {
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
             }
 
             if (await _roomClassRepository.ExistsAsync(rc => rc.HotelId == roomClass.HotelId && rc.Name == roomClass.Name))
@@ -86,7 +86,7 @@ namespace Application.Services.RoomClasses
             {
                 if (!await _amenityRepository.ExistAsync(a => a.Id == amenityId))
                 {
-                    throw new EntityNotFoundException("Amenity", amenityId);
+                    throw new EntityNotFoundException("Amenity");
                 }
             }
 
@@ -105,12 +105,12 @@ namespace Application.Services.RoomClasses
             var existingRoomClass = await _roomClassRepository.GetByIdAsync(id);
             if (existingRoomClass == null)
             {
-                throw new RoomClassNotFoundException();
+                throw new RoomClassNotFoundException("RoomClass Not found");
             }
 
             if (await _roomClassRepository.ExistsAsync(rc => rc.HotelId == existingRoomClass.HotelId && rc.Name == updatedRoomClass.Name && rc.Id != id))
             {
-                throw new RoomClassWithHotelFound();
+                throw new RoomClassWithHotelFound("RoomClass found in Hotel with");
             }
 
             _mapper.Map(updatedRoomClass, existingRoomClass);
@@ -123,7 +123,7 @@ namespace Application.Services.RoomClasses
             var roomClass = await _roomClassRepository.GetByIdAsync(id);
             if (roomClass == null)
             {
-                throw new RoomClassNotFoundException();
+                throw new RoomClassNotFoundException("RoomClass not found");
             }
 
             await _roomClassRepository.DeleteAsync(id);
@@ -134,7 +134,7 @@ namespace Application.Services.RoomClasses
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new RoomClassNotFoundException();
+                throw new RoomClassNotFoundException("RoomClass not found");
             }
             await _imageRepository.CreateAsync(image.Image, roomClassId, ImageType.Gallery);
             await _unitOfWork.SaveChangesAsync();

@@ -1,8 +1,10 @@
 ﻿
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.RoomExceptions
 {
-    public class RoomNotFoundException : ExceptionsBase
+    public class RoomNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public RoomNotFoundException() : base("Room not found.") { }
+        public override string Header => "Room not found.";
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.HotelExceptions
 {
-    public class HotelNotFoundException : ExceptionsBase
+    public class HotelNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public HotelNotFoundException() : base("Hotel not found.") { }
+        public override string Header => "Hotel not found";
     }
 }

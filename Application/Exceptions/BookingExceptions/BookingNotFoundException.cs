@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.BookingExceptions
 {
-    public class BookingNotFoundException : ExceptionsBase
+    public class BookingNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public BookingNotFoundException() : base("Booking not found for the guest.") { }
+        public override string Header => "Booking not found";
     }
 }

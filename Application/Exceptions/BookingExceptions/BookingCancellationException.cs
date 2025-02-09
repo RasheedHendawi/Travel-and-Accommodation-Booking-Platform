@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.BookingExceptions
 {
-    public class BookingCancellationException : ExceptionsBase
+    public class BookingCancellationException(string message) : ConflictExceptions(message) 
     {
-        public BookingCancellationException() : base("Cannot cancel booking.") { }
+        public override string Header => "Can not delete";
     }
 }

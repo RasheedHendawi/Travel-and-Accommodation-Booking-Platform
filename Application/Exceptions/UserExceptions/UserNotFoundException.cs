@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.UserExceptions
 {
-    public class UserNotFoundException : ExceptionsBase
+    public class UserNotFoundException(string message   ) : NotFoundExceptions(message)
     {
-        public UserNotFoundException() : base("User not found.") { }
+        public override string Header => "Not found user";
     }
 }

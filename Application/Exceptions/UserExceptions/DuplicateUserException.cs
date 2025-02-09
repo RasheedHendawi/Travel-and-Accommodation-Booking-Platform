@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.UserExceptions
 {
-    public class DuplicateUserException : ExceptionsBase
+    public class DuplicateUserException(string message) : ConflictExceptions(message)
     {
-        public DuplicateUserException() : base("User with this email already exists.") { }
+        public override string Header => "Duplicate User Exception";
     }
 }

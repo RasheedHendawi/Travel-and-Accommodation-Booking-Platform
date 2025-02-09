@@ -1,9 +1,10 @@
 ﻿
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.GeneralExceptions
 {
-    public class EntityNotFoundException : ExceptionsBase
+    public class EntityNotFoundException(string message) : NotFoundExceptions(message)
     {
-        public EntityNotFoundException(string entity, Guid id)
-            : base($"{entity} not found (ID: {id}).") { }
+        public override string Header => $"{message} not found";
     }
 }

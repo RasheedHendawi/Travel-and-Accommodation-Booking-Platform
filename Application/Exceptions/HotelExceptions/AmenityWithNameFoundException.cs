@@ -1,11 +1,9 @@
-﻿
+﻿using Application.Exceptions.ExceptionTypes;
 
 namespace Application.Exceptions.HotelExceptions
 {
-    public class AmenityWithNameFoundException : ExceptionsBase
+    public class AmenityWithNameFoundException(string message) : ConflictExceptions(message)
     {
-        public AmenityWithNameFoundException() : base("Amenity with this name already exists.")
-        {
-        }
+        public override string Header => "Amenity with name found";
     }
 }

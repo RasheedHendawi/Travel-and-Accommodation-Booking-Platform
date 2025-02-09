@@ -1,45 +1,55 @@
 ﻿using Application.Exceptions;
-using Newtonsoft.Json;
-using System.Net;
+using Application.Exceptions.ExceptionTypes;
+using Microsoft.AspNetCore.Diagnostics;
 
-public class ExceptionMiddleware
+namespace TABP.Middleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionMiddleware> _logger;
-
-    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger) : IExceptionHandler
     {
-        _next = next;
-        _logger = logger;
-    }
+        public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        {
+            LogExceptions(exception);
+            var response = MapExceptions(exception);
+            await Results.Problem(response.Detail, title: response.Title, statusCode: response.StatusCode)
+                .ExecuteAsync(httpContext);
 
-    public async Task InvokeAsync(HttpContext context)
-    {
-        try
-        {
-            await _next(context);
+            return true;
         }
-        catch (ExceptionsBase ex)
+        private MapExceptionResponse MapExceptions(Exception exception)
         {
-            _logger.LogError(ex, ex.Message);
-            await HandleExceptionAsync(context, ex.Message, HttpStatusCode.BadRequest);
+            var response = new MapExceptionResponse();
+            if (exception is not ExceptionsBase exceptionsBase)
+            {
+                response.StatusCode = StatusCodes.Status500InternalServerError;
+                response.Detail = "An error occurred while processing your request.";
+                response.Title = "Internal Server Error";
+            }
+            else
+            {
+                response.StatusCode = exceptionsBase switch
+                {
+                    NotFoundExceptions => StatusCodes.Status404NotFound,
+                    BadRequestException => StatusCodes.Status400BadRequest,
+                    UnauthorizedException => StatusCodes.Status401Unauthorized,
+                    ForbiddenException => StatusCodes.Status403Forbidden,
+                    ConflictExceptions => StatusCodes.Status409Conflict,
+                    _ => StatusCodes.Status500InternalServerError
+                };
+                response.Detail = exceptionsBase.Message;
+                response.Title = exceptionsBase.Header;
+            }
+            return response;
         }
-        catch (Exception ex)
+        private void LogExceptions(Exception exception)
         {
-            _logger.LogError(ex, "An unexpected error occurred.");
-            await HandleExceptionAsync(context, "Internal Server Error", HttpStatusCode.InternalServerError);
+            if (exception is ExceptionsBase)
+            {
+                logger.LogWarning(exception, exception.Message);
+            }
+            else
+            {
+                logger.LogError(exception, exception.Message);
+            }
         }
-    }
-
-    private static Task HandleExceptionAsync(HttpContext context, string message, HttpStatusCode statusCode)
-    {
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)statusCode;
-
-        return context.Response.WriteAsync(JsonConvert.SerializeObject(new
-        {
-            statusCode = (int)statusCode,
-            message
-        }));
     }
 }

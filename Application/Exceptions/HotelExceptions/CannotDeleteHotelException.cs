@@ -1,10 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.HotelExceptions
 {
-    public class CannotDeleteHotelException : ExceptionsBase
+    public class CannotDeleteHotelException(string message) : BadRequestException(message)
     {
-        public CannotDeleteHotelException()
-            : base("Cannot delete hotel with existing room classes.") { }
+        public override string Header => "Cannot delete hotel";
     }
 }

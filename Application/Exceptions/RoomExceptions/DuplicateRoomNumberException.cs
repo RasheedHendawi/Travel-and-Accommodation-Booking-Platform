@@ -1,9 +1,9 @@
-﻿
+﻿using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.RoomExceptions
 {
-    public class DuplicateRoomNumberException : ExceptionsBase
+    public class DuplicateRoomNumberException(string message) : ConflictExceptions(message)
     {
-        public DuplicateRoomNumberException()
-            : base("Room with this number already exists in the room class.") { }
+        public override string Header => "Duplicate room number";
     }
 }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Application.Exceptions.HotelExceptions
 {
-    public class ReviewNotFoundException : ExceptionsBase
+    public class ReviewNotFoundException(string message) : ExceptionsBase(message)
     {
-        public ReviewNotFoundException() : base("Review not found.")
-        {
-        }
+        public override string Header => "Review Not Found";
     }
 }

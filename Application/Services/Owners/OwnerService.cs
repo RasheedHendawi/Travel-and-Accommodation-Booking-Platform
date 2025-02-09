@@ -41,7 +41,7 @@ namespace Application.Services.Owners
         public async Task<OwnersResponse> GetOwnerByIdAsync(Guid id)
         {
             var owner = await _ownerRepository.GetByIdAsync(id)
-                         ?? throw new OwnerNotFoundException();
+                         ?? throw new OwnerNotFoundException("Owner not found !");
 
             return _mapper.Map<OwnersResponse>(owner);
         }
@@ -58,7 +58,7 @@ namespace Application.Services.Owners
         public async Task UpdateOwnerAsync(Guid id, OwnerUpdateRequest request)
         {
             var ownerEntity = await _ownerRepository.GetByIdAsync(id)
-                              ?? throw new OwnerNotFoundException();
+                              ?? throw new OwnerNotFoundException("Owner not found !");
 
             _mapper.Map(request, ownerEntity);
 

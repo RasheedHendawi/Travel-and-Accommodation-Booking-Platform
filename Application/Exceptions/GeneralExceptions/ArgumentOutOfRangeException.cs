@@ -1,10 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.GeneralExceptions
 {
-    public class ArgumentOutOfRangeException : ExceptionsBase
+    public class ArgumentOutOfRangeException(string message) : BadRequestException(message)
     {
-        public ArgumentOutOfRangeException(string parameter)
-            : base($"Argument '{parameter}' is out of range.") { }
+        public override string Header => ($"Argument '{message}' is out of range.");
     }
 }

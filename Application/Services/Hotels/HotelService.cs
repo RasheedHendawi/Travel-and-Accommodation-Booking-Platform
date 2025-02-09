@@ -64,20 +64,20 @@ namespace Application.Services.Hotels
         public async Task<HotelGetResponse> GetHotelByIdAsync(Guid id)
         {
             var hotel = await _hotelRepository.GetByIdAsync(id, true, true, true)
-                        ?? throw new HotelNotFoundException();
+                        ?? throw new HotelNotFoundException("Hotel not found.");
             return _mapper.Map<HotelGetResponse>(hotel);
         }
 
         public async Task<Guid> CreateHotelAsync(HotelCreationRequest request)
         {
             if (!await _cityRepository.ExistsAsync(c => c.Id == request.CityId))
-                throw new CityNotFoundException();
+                throw new CityNotFoundException("City not found !");
 
             if (!await _ownerRepository.ExistsAsync(o => o.Id == request.OwnerId))
-                throw new OwnerNotFoundException();
+                throw new OwnerNotFoundException("Owner not found !");
 
             if (await _hotelRepository.ExistsAsync(h => h.Longitude == request.Longitude && h.Latitude == request.Latitude))
-                throw new DuplicateHotelException();
+                throw new DuplicateHotelException("A hotel at this location already exists.");
 
             var hotel = _mapper.Map<Hotel>(request);
             var createdHotel = await _hotelRepository.CreateAsync(hotel);
@@ -88,7 +88,7 @@ namespace Application.Services.Hotels
         public async Task UpdateHotelAsync(Guid id, HotelUpdateRequest request)
         {
             var hotel = await _hotelRepository.GetByIdAsync(id)
-                        ?? throw new HotelNotFoundException();
+                        ?? throw new HotelNotFoundException("Hotel not found.");
 
             _mapper.Map(request, hotel);
             await _hotelRepository.UpdateAsync(hotel);
@@ -98,10 +98,10 @@ namespace Application.Services.Hotels
         public async Task DeleteHotelAsync(Guid id)
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == id))
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
 
             if (await _roomClassRepository.ExistsAsync(rc => rc.HotelId == id))
-                throw new CannotDeleteHotelException();
+                throw new CannotDeleteHotelException("Dependecy ouccuernce");
 
             await _hotelRepository.DeleteAsync(id);
             await _unitOfWork.SaveChangesAsync();
@@ -110,7 +110,7 @@ namespace Application.Services.Hotels
         public async Task SetHotelThumbnailAsync(Guid id, ImageCreationRequest request)
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == id))
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
 
             await _imageRepository.DeleteAsync(id, ImageType.Thumbnail);
             await _imageRepository.CreateAsync(request.Image, id, ImageType.Thumbnail);
@@ -120,7 +120,7 @@ namespace Application.Services.Hotels
         public async Task AddImageToGalleryAsync(Guid id, ImageCreationRequest request)
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == id))
-                throw new HotelNotFoundException();
+                throw new HotelNotFoundException("Hotel not found.");
 
             await _imageRepository.CreateAsync(request.Image, id, ImageType.Gallery);
             await _unitOfWork.SaveChangesAsync();

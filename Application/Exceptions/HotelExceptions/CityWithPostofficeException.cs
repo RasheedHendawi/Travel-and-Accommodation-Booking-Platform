@@ -1,11 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.HotelExceptions
 {
-    public class CityWithPostofficeException : ExceptionsBase
+    public class CityWithPostofficeException(string message) : ConflictExceptions(message)
     {
-        public CityWithPostofficeException() : base("City with post office exists")
-        {
-        }
+        public override string Header => "City with postoffice";
     }
 }

@@ -1,9 +1,11 @@
 ﻿
 
+using Application.Exceptions.ExceptionTypes;
+
 namespace Application.Exceptions.UserExceptions
 {
-    public class InvalidCredentialsException : ExceptionsBase
+    public class InvalidCredentialsException(string message) : ForbiddenException(message)
     {
-        public InvalidCredentialsException() : base("Credentials are not valid.") { }
+        public override string Header => "Credentials not valid.";
     }
 }

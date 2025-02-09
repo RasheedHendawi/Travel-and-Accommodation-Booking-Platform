@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Exceptions.ExceptionTypes;
 
 namespace Application.Exceptions.RoomExceptions
 {
-    public class DiscountIntervalsException : ExceptionsBase
+    public class DiscountIntervalsException(string message) : BadRequestException(message)
     {
-        public DiscountIntervalsException() : base("Discount intervals are overlapping.")
-        {
-        }
+        public override string Header => "Discount Intervals Exception";
     }
 }

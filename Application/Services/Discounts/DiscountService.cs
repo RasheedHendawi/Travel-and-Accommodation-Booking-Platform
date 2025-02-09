@@ -50,13 +50,13 @@ namespace Application.Services.Discounts
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new RoomClassNotFoundException();
+                throw new RoomClassNotFoundException("RoomClass not found");
             }
 
             var discount = await _discountRepository.GetByIdAsync(roomClassId, discountId);
             if (discount == null)
             {
-                throw new DiscountNotFoundException();
+                throw new DiscountNotFoundException("Discount Not Found In RoomClass");
             }
 
             return _mapper.Map<DiscountResponse>(discount);
@@ -66,12 +66,12 @@ namespace Application.Services.Discounts
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new RoomClassNotFoundException();
+                throw new RoomClassNotFoundException("RoomClass not found");
             }
 
             if ( await _discountRepository.ExistsAsync(d => request.EndDate >= d.StartDate && request.StartDate <= d.EndDate))
             {
-                throw new DiscountIntervalsException();
+                throw new DiscountIntervalsException("Discount intervals are overlapping.");
             }
 
             var discount = _mapper.Map<Discount>(request);
@@ -88,12 +88,12 @@ namespace Application.Services.Discounts
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new RoomClassNotFoundException();
+                throw new RoomClassNotFoundException("RoomClass not found");
             }
 
             if (!await _discountRepository.ExistsAsync(d => d.Id == discountId && d.RoomClassId == roomClassId))
             {
-                throw new DiscountNotFoundException();
+                throw new DiscountNotFoundException("Discount Not Found In RoomClass");
             }
 
             await _discountRepository.DeleteAsync(discountId);
