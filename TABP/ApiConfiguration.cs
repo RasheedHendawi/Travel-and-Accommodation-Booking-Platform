@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using TABP.Middleware;
 using TABP.Services;
 using TABP.Utilites;
 using TABP.Utilites.RateLimitation;
@@ -19,19 +20,31 @@ namespace TABP
             services.AddScoped<IHttpUserContextAccessor, HttpUserContextAccessor>();
 
             services.AddEndpointsApiExplorer().AddSwagger();
+
+            services.AddProblemDetails()
+                .AddExceptionHandler<ExceptionMiddleware>();
+
             services.AddApiVersioning();
+
             services.AddControllers(options => options.Filters.Add<LogFilter>())
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
+
             services.AddDateOnlyTimeOnlyStringConverters();
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddFluentValidation();
+
             services.AddAuthentication();
+
             services.AddAuthorization();
+
             //services.AddRateLimiting();
+
             return services;
         }
 
