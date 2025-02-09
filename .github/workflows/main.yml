@@ -1,0 +1,39 @@
+name: Build and Test
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**/*.cs'
+      - '**/*.csproj'
+
+env:
+  DOTNET_VERSION: '8.0.x'
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install Dependencies (Main Project)
+      run: dotnet restore
+
+    - name: Build Project
+      run: dotnet build  --configuration Release --no-restore
+
+    - name: Run Tests
+      run: dotnet test 'xUnitTABP/Application.Tests.csproj'
