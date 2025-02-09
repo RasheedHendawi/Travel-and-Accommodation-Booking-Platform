@@ -2,6 +2,9 @@
 using Application.DTOs.Hotels;
 using Application.DTOs.Reviews;
 using Application.DTOs.Shared;
+using Application.Exceptions.BookingExceptions;
+using Application.Exceptions.HotelExceptions;
+using Application.Exceptions.UserExceptions;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -46,7 +49,7 @@ namespace Application.Services.Reviews
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new Exception("Hotel not found!");
+                throw new HotelNotFoundException();
             }
 
             var query = new Query<Review>(
@@ -68,11 +71,11 @@ namespace Application.Services.Reviews
         {
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new Exception("Hotel not found!");
+                throw new HotelNotFoundException();
             }
 
             var review = await _reviewRepository.GetByIdAsync(hotelId, reviewId)
-                         ?? throw new Exception("Hotel not found!");
+                         ?? throw new HotelNotFoundException();
 
             return _mapper.Map<ReviewResponse>(review);
         }
@@ -83,22 +86,22 @@ namespace Application.Services.Reviews
 
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new Exception("Hotel not found!");
+                throw new HotelNotFoundException();
             }
 
             if (!await _userRepository.ExistsByIdAsync(userId))
             {
-                throw new Exception("User not found!");
+                throw new HotelNotFoundException();
             }
 
             if (!await _bookingRepository.ExistsAsync(b => b.HotelId == hotelId && b.GuestId == userId))
             {
-                throw new Exception("No Booking For Guest In Hotel");
+                throw new BookingNotFoundException();
             }
 
             if (await _reviewRepository.ExistsAsync(r => r.GuestId == userId && r.HotelId == hotelId))
             {
-                throw new Exception("Guest Already Reviewed This Hotel");
+                throw new GuestAlreadyReviewedException();
             }
 
             var newReview = _mapper.Map<Review>(request);
@@ -121,21 +124,21 @@ namespace Application.Services.Reviews
             var userId = _userAccessor.Id;
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new Exception("Hotel not found!");
+                throw new HotelNotFoundException();
             }
 
             if (!await _userRepository.ExistsByIdAsync(userId))
             {
-                throw new Exception("Hotel not found!");
+                throw new HotelNotFoundException();
             }
 
             if (_userAccessor.Role != UserRoles.Guest)
             {
-                throw new Exception(" not Guest!");
+                throw new ForbiddenUserException();
             }
 
             var review = await _reviewRepository.GetByIdAsync(hotelId, reviewId, userId)
-                         ?? throw new Exception("Hotel not found!");
+                         ?? throw new HotelNotFoundException();
             var TotalRating = await _reviewRepository.GetTotalRatingForHotelAsync(hotelId);
             var TotalReviews = await _reviewRepository.GetReviewCountForHotelAsync(hotelId);
             TotalRating += request.Rating - review.Rating;
@@ -152,11 +155,11 @@ namespace Application.Services.Reviews
 
             if (!await _hotelRepository.ExistsAsync(h => h.Id == hotelId))
             {
-                throw new Exception("Hotel not found!");
+                throw new HotelNotFoundException();
             }
 
             var review = await _reviewRepository.GetByIdAsync(hotelId, reviewId, userId)
-                         ?? throw new Exception("Review not found!");
+                         ?? throw new ReviewNotFoundException();
 
             await _reviewRepository.DeleteAsync(reviewId);
             await _unitOfWork.SaveChangesAsync();

@@ -1,6 +1,7 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Amenities;
 using Application.DTOs.Shared;
+using Application.Exceptions.HotelExceptions;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -42,7 +43,7 @@ namespace Application.Services.Amenities
         public async Task<AmenityResponse> GetAmenityByIdAsync(Guid id)
         {
             var amenity = await _amenityRepository.GetByIdAsync(id)
-                          ?? throw new Exception("Amenity not found.");
+                          ?? throw new AmenityNotFoundException ();
             return _mapper.Map<AmenityResponse>(amenity);
         }
 
@@ -50,7 +51,7 @@ namespace Application.Services.Amenities
         {
             if (await _amenityRepository.ExistAsync(a => a.Name == request.Name))
             {
-                throw new Exception("Amenity with this name already exists.");
+                throw new AmenityWithNameFoundException();
             }//may remove this check if we want to allow duplicate names
 
             var newAmenity = _mapper.Map<Amenity>(request);
@@ -63,11 +64,11 @@ namespace Application.Services.Amenities
         public async Task UpdateAmenityAsync(Guid id, AmenityUpdateRequest request)
         {
             var amenityEntity = await _amenityRepository.GetByIdAsync(id)
-                                 ?? throw new Exception("Amenity not found.");
+                                 ?? throw new AmenityNotFoundException();
 
             if (await _amenityRepository.ExistAsync(a => a.Name == request.Name && a.Id != id))
             {
-                throw new Exception("Another amenity with this name already exists.");
+                throw new AmenityWithNameFoundException();
             }
 
             _mapper.Map(request, amenityEntity);

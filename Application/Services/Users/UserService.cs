@@ -5,6 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using Application.Contracts;
 using Application.DTOs.Users;
+using Application.Exceptions.UserExceptions;
 
 
 namespace Application.Services.Users
@@ -34,7 +35,7 @@ namespace Application.Services.Users
         public async Task<LoginResponse> LoginAsync(string email, string password)
         {
             var user = await _userRepository.AuthenticateAsync(email, password)
-                       ?? throw new Exception("Creadtionals not Valid");
+                       ?? throw new InvalidCredentialsException();
 
             var token = _jwtGenerator.GenerateToken(user);
 
@@ -44,16 +45,15 @@ namespace Application.Services.Users
         public async Task RegisterGuestAsync(RegisterRequest registerRequest)
         {
             var defaultRole = "Guest";
-            var role = await _roleRepository.GetByNameAsync(defaultRole)
-                       ?? throw new Exception("Invalid Role");
+            var role = await _roleRepository.GetByNameAsync(defaultRole);
 
             if (await _userRepository.ExistsByEmailAsync(registerRequest.Email))
             {
-                throw new Exception("User With Email Already Exists");
+                throw new DuplicateUserException();
             }
 
             var user = _mapper.Map<User>(registerRequest);
-            user.Roles.Add(role);
+            user.Roles.Add(role!);
 
             await _userRepository.CreateAsync(user);
 

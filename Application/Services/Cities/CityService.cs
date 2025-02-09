@@ -1,6 +1,8 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Cities;
 using Application.DTOs.Images;
+using Application.Exceptions.GeneralExceptions;
+using Application.Exceptions.HotelExceptions;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -54,7 +56,7 @@ namespace Application.Services.Cities
         {
             if (request.Count <= 0)
             {
-                throw new ArgumentException("Count must be greater than zero.");
+                throw new ArgumentOutOfRangeException(request.Count.ToString());
             }
 
             var cities = await _cityRepository.GetMostVisitedAsync(request.Count);
@@ -65,7 +67,7 @@ namespace Application.Services.Cities
         {
             if (await _cityRepository.ExistsAsync(c => c.PostOffice == request.PostOffice))
             {
-                throw new Exception("City with post office exists");
+                throw new CityWithPostofficeException();
             }
             var city = _mapper.Map<City>(request);
             await _cityRepository.CreateAsync(city);
@@ -76,11 +78,11 @@ namespace Application.Services.Cities
         {
             if (await _cityRepository.ExistsAsync(c => c.PostOffice == request.PostOffice))
             {
-                throw new Exception("City With Post Office Exists");
+                throw new CityWithPostofficeException();
             }
 
             var city = await _cityRepository.GetByIdAsync(id) ??
-                       throw new Exception($"Not found {id}");
+                       throw new CityNotFoundException();
 
             _mapper.Map(request, city);
             await _cityRepository.UpdateAsync(city);
@@ -91,12 +93,12 @@ namespace Application.Services.Cities
         {
             if (!await _cityRepository.ExistsAsync(c => c.Id == id))
             {
-                throw new Exception($"Not Found {id}");
+                throw new CityNotFoundException();
             }
 
             if (await _hotelRepository.ExistsAsync(h => h.CityId == id))
             {
-                throw new Exception($"DependentsExist on this ID : {id}");
+                throw new DependencyDeletionException("City", "Hotel");
             }
 
             await _cityRepository.DeleteAsync(id);
@@ -107,7 +109,7 @@ namespace Application.Services.Cities
         {
             if (!await _cityRepository.ExistsAsync(c => c.Id == id))
             {
-                throw new Exception($"Not Found {id}");
+                throw new CityNotFoundException();
             }
             await _imageRepository.DeleteAsync(id, ImageType.Thumbnail);
             await _imageRepository.CreateAsync(request.Image, id, ImageType.Thumbnail);

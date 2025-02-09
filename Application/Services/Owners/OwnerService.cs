@@ -1,6 +1,7 @@
 ﻿using Application.Contracts;
 using Application.DTOs.Owners;
 using Application.DTOs.Shared;
+using Application.Exceptions.HotelExceptions;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -40,7 +41,7 @@ namespace Application.Services.Owners
         public async Task<OwnersResponse> GetOwnerByIdAsync(Guid id)
         {
             var owner = await _ownerRepository.GetByIdAsync(id)
-                         ?? throw new Exception("Owner not found.");
+                         ?? throw new OwnerNotFoundException();
 
             return _mapper.Map<OwnersResponse>(owner);
         }
@@ -57,7 +58,7 @@ namespace Application.Services.Owners
         public async Task UpdateOwnerAsync(Guid id, OwnerUpdateRequest request)
         {
             var ownerEntity = await _ownerRepository.GetByIdAsync(id)
-                              ?? throw new Exception("Owner not found.");
+                              ?? throw new OwnerNotFoundException();
 
             _mapper.Map(request, ownerEntity);
 

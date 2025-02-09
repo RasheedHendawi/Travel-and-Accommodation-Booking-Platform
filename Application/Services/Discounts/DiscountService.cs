@@ -1,14 +1,12 @@
-﻿
-
-using Application.Contracts;
+﻿using Application.Contracts;
 using Application.DTOs.Discounts;
+using Application.Exceptions.RoomExceptions;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UnitOfWork;
 using Domain.Models;
-using System.Threading;
 
 namespace Application.Services.Discounts
 {
@@ -52,13 +50,13 @@ namespace Application.Services.Discounts
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new Exception("RoomClass Not Found");
+                throw new RoomClassNotFoundException();
             }
 
             var discount = await _discountRepository.GetByIdAsync(roomClassId, discountId);
             if (discount == null)
             {
-                throw new Exception("Discount Not Found In RoomClass");
+                throw new DiscountNotFoundException();
             }
 
             return _mapper.Map<DiscountResponse>(discount);
@@ -68,12 +66,12 @@ namespace Application.Services.Discounts
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new Exception("RoomClass Not Found");
+                throw new RoomClassNotFoundException();
             }
 
             if ( await _discountRepository.ExistsAsync(d => request.EndDate >= d.StartDate && request.StartDate <= d.EndDate))
             {
-                throw new Exception("Discount Intervals Conflict");
+                throw new DiscountIntervalsException();
             }
 
             var discount = _mapper.Map<Discount>(request);
@@ -90,12 +88,12 @@ namespace Application.Services.Discounts
         {
             if (!await _roomClassRepository.ExistsAsync(rc => rc.Id == roomClassId))
             {
-                throw new Exception("RoomClass Not Found");
+                throw new RoomClassNotFoundException();
             }
 
             if (!await _discountRepository.ExistsAsync(d => d.Id == discountId && d.RoomClassId == roomClassId))
             {
-                throw new Exception("Discount Not Found In Room Class");
+                throw new DiscountNotFoundException();
             }
 
             await _discountRepository.DeleteAsync(discountId);
