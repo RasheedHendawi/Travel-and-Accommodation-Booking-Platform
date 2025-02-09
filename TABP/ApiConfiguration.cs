@@ -43,7 +43,7 @@ namespace TABP
 
             services.AddAuthorization();
 
-            //services.AddRateLimiting();
+            services.AddRateLimiting();
 
             return services;
         }
