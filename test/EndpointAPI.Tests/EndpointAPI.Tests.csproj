@@ -34,9 +34,9 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TABP\TABP.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\TABP\TABP.csproj" />
+	</ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />

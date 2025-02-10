@@ -36,4 +36,4 @@ jobs:
       run: dotnet build  --configuration Release --no-restore
 
     - name: Run Tests
-      run: dotnet test 'xUnitTABP/Application.Tests.csproj'
+      run: dotnet test 'test/xUnitTABP/Application.Tests.csproj'

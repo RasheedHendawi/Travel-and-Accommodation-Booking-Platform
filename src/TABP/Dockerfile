@@ -12,11 +12,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["TABP/TABP.csproj", "TABP/"]
-COPY ["Application/Application.csproj", "Application/"]
-COPY ["Domain/Domain.csproj", "Domain/"]
-COPY ["Shared/Shared.csproj", "Shared/"]
-COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["src/TABP/TABP.csproj", "src/TABP/"]
+COPY ["src/Application/Application.csproj", "src/Application/"]
+COPY ["src/Domain/Domain.csproj", "src/Domain/"]
+COPY ["src/Shared/Shared.csproj", "src/Shared/"]
+COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
+
 RUN dotnet restore "./TABP/TABP.csproj"
 COPY . .
 WORKDIR "/src/TABP"

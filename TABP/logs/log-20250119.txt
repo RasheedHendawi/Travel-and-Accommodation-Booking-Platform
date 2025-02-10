@@ -1,6 +1,0 @@
-2025-01-19 00:12:32.662 +02:00 [ERR] Failed executing DbCommand (113ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
-ALTER TABLE [Booking] ADD CONSTRAINT [FK_Booking_Hotel_HotelId] FOREIGN KEY ([HotelId]) REFERENCES [Hotel] ([Id]) ON DELETE CASCADE;
-2025-01-19 00:16:09.585 +02:00 [ERR] Failed executing DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
-ALTER TABLE [Booking] ADD CONSTRAINT [FK_Booking_Hotel_HotelId] FOREIGN KEY ([HotelId]) REFERENCES [Hotel] ([Id]) ON DELETE CASCADE;
-2025-01-19 02:52:50.102 +02:00 [ERR] Failed executing DbCommand (597ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
-ALTER TABLE [Booking] ADD CONSTRAINT [FK_Booking_Hotel_HotelId] FOREIGN KEY ([HotelId]) REFERENCES [Hotel] ([Id]) ON DELETE CASCADE;
