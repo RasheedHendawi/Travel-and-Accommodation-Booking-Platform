@@ -190,7 +190,7 @@ bash
 dotnet run
 
 
-The swagger UI will open automatically where you can try and explore the endpoints or you can open it using http://localhost:<portNumber>/swagger.
+The swagger UI will open after adding /`swagger` to the url where you can try and explore the endpoints.
 
 ##### To access admin's accessability:
 - **Email:** Admin@hotelmanager.com
